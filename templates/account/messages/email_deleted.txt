@@ -1,0 +1,2 @@
+{% load i18n %}
+{% blocktrans %}次のメールアドレスは削除されました。 {{email}}.{% endblocktrans %}

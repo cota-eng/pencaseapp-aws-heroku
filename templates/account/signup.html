@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+
+<!-- Material form login -->
+<div class="card">
+    <h2 class="card-header info-color white-text text-center mb-4">
+        {% trans "Sign Up" %}
+    </h2>
+    <div class="text-center">
+        <p>{% blocktrans %}アカウントは作成済みですか？ そうであれば、 <a href="{{ login_url }}">ログイン</a>してください。{% endblocktrans %}</p>
+        <!--Card content-->
+        <div class="card-body px-lg-5 pt-0">
+            <!-- Form -->
+            <form class="signup text-center" style="color: #757575;" id="signup_form" method="post"
+                action="{% url 'account_signup' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <button class="btn btn-outline-info waves-effect"
+                    type="submit">{% trans "Sign Up" %} &raquo;</button>
+            </form>
+            <!-- Form -->
+        </div>
+    </div>
+</div>
+<!-- Material form login -->
+{% endblock %}

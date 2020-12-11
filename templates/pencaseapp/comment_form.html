@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="form-group purple-border">
+    <form method="POST">
+        {% csrf_token %}
+</div>
+{{form.as_p}}
+<button type="submit" class="btn btn-outline-primary waves-effect">コメントする</button>
+<a href="{{request.META.HTTP_REFERER}}" class="btn btn-outline-danger waves-effect">戻る</a>
+</form>
+</div>
+{% endblock content %}

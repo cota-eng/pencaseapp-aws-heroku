@@ -1,0 +1,39 @@
+/* main {
+  margin: 0 auto;
+} */
+/* .container {
+  margin: 0 auto;
+  background-color: #f2d8bf;
+} */
+
+
+body {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  font-family: "Noto Sans JP", sans-serif;
+}
+.fixed-right-bottom {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+}
+@media (min-width: 992px) {
+    body {
+      font-size: 1.5rem;
+    }
+}
+@media (max-width: 991.98px) {
+  body {
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 767.98px) {
+  body {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 575.98px) {
+  body {
+    font-size: 1rem;
+  }
+}

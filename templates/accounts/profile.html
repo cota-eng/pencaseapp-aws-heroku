@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="text-center">
+
+        <p>hello</p>
+        <p>{{user_data.email}}</p>
+        <p>{{user_data.nickname}}</p>
+        <p>{{user_data.created_at}}</p>
+        <a href="{% url 'accounts:profile_edit' %}">編集</a>
+    </div>
+</div>
+{% endblock content %}

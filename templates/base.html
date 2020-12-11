@@ -1,0 +1,92 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% block title %}みんなの筆箱紹介{% endblock %}</title>
+    {% block extra_head %} {% endblock %}
+
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!-- material -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"
+        rel="stylesheet" />
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+    {% block extra_css %}
+    {% endblock extra_css %}
+</head>
+
+<body>
+    <div class="fixed-top">
+        <nav class="navbar navbar-expand-sm navbar-dark brown">
+            <div class="navbar mr-auto " id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'pencaseapp:home' %}">トップ</a>
+                    </li>
+
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-nav " id="navbarSupportedContent">
+                <ul class="navbar-nav  nav-flex-icons nav-item dropdown dropleft">
+                    <li class="nav-item avatar">
+                        <a class="nav-link p-0 nav-link dropdown-toggle" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+                            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
+                                class="rounded-circle z-depth-0" alt="avatar image" height="35" />
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'accounts:profile_edit' %}">プロフィール</a>
+                            <a class="dropdown-item" href="{% url 'account_logout' %}">ログアウト</a>
+                            <a class="dropdown-item" href="{% url 'account_login' %}">ログイン</a>
+                            <div class="dropdown-divider"></div>
+
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+
+        </nav>
+    </div>
+
+    {% if messages %}
+    <ul class="messages_ul">
+        {% for message in messages %}
+        <li class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">{{ message|safe }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div class="container">
+        {% block content %} {% endblock %}
+    </div>
+    {% block extra_body %} {% endblock %}
+    {% block extra_js %}{% endblock extra_js %}
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js">
+    </script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,2 @@
+{% load i18n %}
+{% blocktrans %}メールアドレスの確認が完了しました。お手数ですが、次にログインしてください。 {% endblocktrans %}

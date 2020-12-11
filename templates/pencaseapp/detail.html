@@ -1,0 +1,96 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<div class="container">
+    <div class="text-center">
+        <img src="{{ object.thumbnail.url }}" class="img-thumbnail" />
+        <br>
+        <p>{{object.description|safe}}</p>
+        <a href="https://{{object.author.nickname}}">dfs</a>
+        <small>{{object.author.nickname}}さんの筆箱</small><br />
+        {% if request.user == object.author %}
+        <a class="btn btn-danger" href="{% url 'pencaseapp:article_delete' object.pk %}"><i class="fas fa-trash"></i>
+            削除する</a>
+        {% endif %} {% if request.user == object.author %}
+        <a class="btn btn-light" href="{% url 'pencaseapp:article_update' object.pk %}"><i class="fas fa-pen"></i>
+            編集</a>
+        {% endif %}
+        <div class="container">
+            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large"
+                data-text="筆箱紹介を投稿しました。" data-hashtags="筆箱紹介" data-lang="ja" data-show-count="false">Tweet</a>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+
+        <a class="btn btn-primary" href="{% url 'pencaseapp:pencase_comment' object.pk %}">感想を伝えよう！</a>
+
+        <form action="{% url 'pencaseapp:article_likes' object.pk %}" method="POST">
+            {% csrf_token %}
+            <button class="btn btn-primary" type="submit">
+                <i class="far fa-heart"></i>いいね ({{total_likes}})
+            </button>
+        </form>
+        <a class="btn btn-primary" href="{% url 'pencaseapp:home'%}"><i class="fas fa-backward"></i> 戻る</a>
+    </div>
+</div>
+
+<div class="card grey lighten-3 chat-room">
+    <div class="card-body">
+        {% for comment in object.comments.all %}
+        {% if comment.exists %}
+        <h2>感想・返信</h2>
+        {% endif %}
+
+        <div class="row px-2">
+            <!-- Grid column -->
+            <div class="col-md-6 col-xl-8 pl-md-3 px-lg-auto px-0">
+                <div class="chat-message">
+                    <ul class="list-unstyled chat">
+                        <li class="d-flex justify-content-between mb-4">
+                            <div class="chat-body white p-3 ml-2 z-depth-1">
+                                <div class="header">
+                                    <strong class="primary-font">「{{comment.commentator.nickname}}」さん</strong>
+                                    <small class="pull-right text-muted"><i
+                                            class="far fa-clock"></i>{{comment.created_at}}</small>
+                                </div>
+                                <hr class="w-100" />
+                                <p class="mb-0">{{comment.text|linebreaks}}</p>
+                            </div>
+                        </li>
+                        <a class="btn btn-info btn-rounded btn-sm waves-effect waves-light float-right"
+                            href="{% url 'pencaseapp:pencase_reply' comment.pk  %}">返信する</a>
+                        <a class="btn btn-info btn-rounded btn-sm waves-effect waves-light float-right"
+                            href="{% url 'pencaseapp:pencase_reply' comment.pk  %}">詳細ページで戻るにする
+                        </a>
+                        <hr />
+                        {% for reply in comment.replies.all %}
+                        <li class=" mr-2 offset-ml-lg-3 ml-0 "></li>
+                        <li class="d-flex justify-content-between mb-4">
+                            <div class="chat-body gray p-3 ml-2 z-depth-1">
+                                <div class="header">
+                                    <strong class="primary-font">{{reply.replyer.nickname}}</strong>
+                                    <small class="pull-right text-muted"><i class="far fa-clock"></i>
+                                        {{reply.created_at}}</small>
+                                </div>
+                                <hr class="w-100" />
+                                <p class="mb-0">{{reply.text}}</p>
+                            </div>
+                        </li>
+                        {% endfor %}
+                        <li class="white">
+                            <div class="form-group basic-textarea">
+                                <textarea class="form-control pl-2 my-0" id="exampleFormControlTextarea2" rows="3"
+                                    placeholder="Type your message here..."></textarea>
+                            </div>
+                        </li>
+                        <button type="button"
+                            class="btn btn-info btn-rounded btn-sm waves-effect waves-light float-right">
+                            Send
+                        </button>
+                    </ul>
+                </div>
+            </div>
+            <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

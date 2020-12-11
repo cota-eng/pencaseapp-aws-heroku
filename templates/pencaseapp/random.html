@@ -1,0 +1,70 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<div>
+<h1>筆箱紹介へようこそ</h1>
+    <ul>
+        {% if user.is_authenticated %}
+        <li>{{user.nickname}}</li>
+        {% else %}
+        <li><a href="{% url 'account_login' %}">さいんいん</a></li>
+        {% endif %}
+    </ul>
+</div>
+
+<main>
+        <div class="text-center">
+        <h2>ランダムな筆箱</h2>
+            <div class="row">
+                {% for object in object_list %}
+                <div class="col-lg-6 col-md-6 col-sm-12 my-3">
+                    <!-- <h5 class="card-title">{{object.title}}</h5> -->
+                    <img src="{{ object.thumbnail.url }}" class="img-thumbnail" />
+                    <div class="text-center"><a href="{% url 'pencaseapp:article_detail' object.pk %}"
+                        class="btn btn-primary"><i class="fas fa-angle-double-right"></i></a></div>
+<p>{{object.likes.count}}</p>                </div>
+                <br />
+                {% endfor %}
+            </div>
+        <nav aria-label="Page navigation example">
+
+            <ul class="pagination justify-content-center pagination-lg g-mt-28 g-mb-28">
+                <!-- 前へ の部分 -->
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+
+                <!-- 数字の部分 -->
+                {% for num in page_obj.paginator.page_range %}
+                {% if num <= page_obj.number|add:5 and num >= page_obj.number|add:-5 %}
+
+                {% if page_obj.number == num %}
+                <li class="page-item active"><a class="page-link" href="#">{{ num }}</a></li>
+                {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+
+                <!-- 次へ の部分 -->
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+
+        </nav>
+    </div>
+    <a onclick="window.history.back(); return false;">戻る</a>
+    <a href="{% url 'pencaseapp:article_create' %}" class="fixed-right-bottom btn-floating btn-lg btn-default"><i
+            class="fas fa-plus-circle fa-4x"
+            ></i>投稿する</a>
+            
+    </div>
+</main>
+{% endblock content %}

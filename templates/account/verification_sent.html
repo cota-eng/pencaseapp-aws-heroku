@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Verify Your E-mail Address" %}</h1>
+
+    <p>{% blocktrans %}正しいメールアドレスかどうか確認するメールを送信しました。 そのメールのリンクから、登録を完了させてください。 数分以内で送られますが、もし届かないようでしたらTwitterまで連絡をお願いいたします。{% endblocktrans %}</p>
+
+{% endblock %}
