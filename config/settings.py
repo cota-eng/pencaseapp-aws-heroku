@@ -44,12 +44,6 @@ AUTHENTICATION_BACKENDS = [
 # django-contrib.sites
 SITE_ID = 1
 
-# django-allauth
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# if in real case use email
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
 # set for users
 LOGIN_URL = "/"
 LOGIN_REDIRECT_URL = '/'
@@ -120,6 +114,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # for email backend
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# if in real case use email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = DEFAULT_FROM_EMAIL  = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
