@@ -8,12 +8,12 @@ from imagekit.processors import ResizeToFill
 
 from ckeditor.fields import RichTextField
 class Article(models.Model):
-    # origin_image = models.ImageField(upload_to="media/%Y/%m/%d", height_field=None, width_field=None, max_length=None)
-    # thumbnail = ImageSpecField(source='origin_image',
-    #                         processors=[ResizeToFill(480,270)],
-    #                         format="JPEG",
-    #                         options={'quality': 90}
-    #                         )
+    origin_image = models.ImageField(upload_to="media/%Y/%m/%d", height_field=None, width_field=None, max_length=None)
+    thumbnail = ImageSpecField(source='origin_image',
+                            processors=[ResizeToFill(480,270)],
+                            format="JPEG",
+                            options={'quality': 90}
+                            )
     title = models.CharField(max_length=20)
     description = RichTextField(blank=True, null=True)
     # description = models.TextField()

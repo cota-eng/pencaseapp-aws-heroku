@@ -19,15 +19,15 @@
             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
 
-        <a class="btn btn-primary" href="{% url 'pencaseapp:pencase_comment' object.pk %}">感想を伝えよう！</a>
+        <a class="btn btn-primary" href="{% url 'pencaseapp:pencase_comment' object.pk %}">コメント</a>
 
         <form action="{% url 'pencaseapp:article_likes' object.pk %}" method="POST">
             {% csrf_token %}
             <button class="btn btn-primary" type="submit">
-                <i class="far fa-heart"></i>いいね ({{total_likes}})
+                <i class="far fa-heart"></i> いいね ({{total_likes}})
             </button>
         </form>
-        <a class="btn btn-primary" href="{% url 'pencaseapp:home'%}"><i class="fas fa-backward"></i> 戻る</a>
+        <a class="btn btn-primary" href="{% url 'pencaseapp:home'%}"><i class="fas fa-backward"></i>  戻る</a>
     </div>
 </div>
 
@@ -50,15 +50,14 @@
                                     <small class="pull-right text-muted"><i
                                             class="far fa-clock"></i>{{comment.created_at}}</small>
                                 </div>
-                                <hr class="w-100" />
                                 <p class="mb-0">{{comment.text|linebreaks}}</p>
                             </div>
                         </li>
-                        <a class="btn btn-info btn-rounded btn-sm waves-effect waves-light float-right"
+                        <div>
+                            <a class="btn btn-info btn-rounded btn-sm waves-effect waves-light float-right"
                             href="{% url 'pencaseapp:pencase_reply' comment.pk  %}">返信する</a>
-                        <a class="btn btn-info btn-rounded btn-sm waves-effect waves-light float-right"
-                            href="{% url 'pencaseapp:pencase_reply' comment.pk  %}">詳細ページで戻るにする
                         </a>
+                        </div>
                         <hr />
                         {% for reply in comment.replies.all %}
                         <li class=" mr-2 offset-ml-lg-3 ml-0 "></li>
@@ -69,27 +68,19 @@
                                     <small class="pull-right text-muted"><i class="far fa-clock"></i>
                                         {{reply.created_at}}</small>
                                 </div>
-                                <hr class="w-100" />
                                 <p class="mb-0">{{reply.text}}</p>
                             </div>
                         </li>
+                        <hr class="w-100" />
                         {% endfor %}
-                        <li class="white">
-                            <div class="form-group basic-textarea">
-                                <textarea class="form-control pl-2 my-0" id="exampleFormControlTextarea2" rows="3"
-                                    placeholder="Type your message here..."></textarea>
-                            </div>
-                        </li>
-                        <button type="button"
-                            class="btn btn-info btn-rounded btn-sm waves-effect waves-light float-right">
-                            Send
-                        </button>
                     </ul>
                 </div>
             </div>
             <!-- Grid column -->
         </div>
         <!-- Grid row -->
+        {% empty %}
+        <p>コメントはまだありません。</p>
         {% endfor %}
     </div>
 </div>
