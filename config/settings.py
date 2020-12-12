@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',
     'pencaseapp.apps.PencaseappConfig',
+    'blog.apps.BlogConfig',
     'django_cleanup.apps.CleanupConfig',
     # 'rest_framework',
     # 'rest_framework.authtoken',

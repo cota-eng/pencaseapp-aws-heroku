@@ -1,12 +1,10 @@
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
-
-# imagekit
 from imagekit.models import ImageSpecField, ProcessedImageField
 from imagekit.processors import ResizeToFill
-
 from ckeditor.fields import RichTextField
+
 class Article(models.Model):
     origin_image = models.ImageField('サムネイル',upload_to="media/%Y/%m/%d", height_field=None, width_field=None, max_length=None)
     thumbnail = ImageSpecField(source='origin_image',

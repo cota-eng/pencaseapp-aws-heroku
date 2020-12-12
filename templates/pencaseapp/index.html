@@ -26,7 +26,7 @@
                 <div class="card my-2">
                     <!--Card image-->
                     <div class="view overlay">
-                        <img src="{{ object.thumbnail.url }}" class="card-img-top" alt="">
+                        <img src="{{ object.thumbnail.url }}" class="card-img-top" alt="" loading="lazy">
                         <a href="{% url 'pencaseapp:article_detail' object.pk %}">
                             <div class="mask rgba-white-slight"></div>
                         </a>
@@ -67,7 +67,7 @@
                 <div class="card">
                     <!--Card image-->
                     <div class="view overlay">
-                        <img src="{{ object.thumbnail.url }}" class="card-img-top" alt="">
+                        <img src="{{ object.thumbnail.url }}" class="card-img-top" alt="" loading="lazy">
                         <a href="{% url 'pencaseapp:article_detail' object.pk %}">
                             <div class="mask rgba-white-slight"></div>
                         </a>
