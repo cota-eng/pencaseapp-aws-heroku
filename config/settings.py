@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'storages',
     'imagekit',
     'ckeditor',
-    'boto3',
 ]
 AUTHENTICATION_BACKENDS = [
    'django.contrib.auth.backends.ModelBackend',
@@ -71,7 +70,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', 
+    # 'whitenoise.middleware.WhiteNoiseMiddleware', 
 
 ]
 
@@ -117,7 +116,6 @@ AUTH_PASSWORD_VALIDATORS = [
 # for email backend
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# if in real case use email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = DEFAULT_FROM_EMAIL  = env('EMAIL_HOST_USER')
@@ -140,8 +138,8 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URL = '/media/'
 """Use Custom User"""
 ACCOUNT_FORMS = {'signup': 'accounts.forms.SignupCustomForm'}
 AUTH_USER_MODEL = "accounts.CustomUser"
@@ -191,7 +189,7 @@ ALLOWED_HOSTS = ['localhost','127.0.0.1','pencaseapp.herokuapp.com']
 #         },
 #     }
 # }
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 DATABASES = {
     'default': {
@@ -203,13 +201,12 @@ DATABASES = {
         'PORT': '',
     }
 }
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
 DATABASES['default'].update(db_from_env)
-# STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# django-heroku
+
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 try:
     from .local_settings import *
 except ImportError:
@@ -226,9 +223,34 @@ if not DEBUG:
     AWS_S3_OBJECT_PARAMETERS = {
         'CacheControl': 'max-age=86400',
     }
+
     AWS_LOCATION = 'static'
     AWS_DEFAULT_ACL = None
+    AWS_DEFAULT_ACL = None
+
     STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+    STATICFILES_DIRS = (
+        [
+            os.path.join(BASE_DIR, "static"),
+        ]
+    )
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    # AWS_S3_FILE_OVERWRITE = True
+    AWS_S3_SECURE_URLS = True
+    # AWS_QUERYSTRING_AUTH = False
     # AWS_LOCATION = 'media'
-    # MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+    MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    # MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+    # 変更
+    DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
+
+# - -------------
+# AWS_LOCATION = 'static'
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'mysite/static'),
+# ]
+# STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# - --------------
