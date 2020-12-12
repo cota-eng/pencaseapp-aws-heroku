@@ -43,7 +43,7 @@ class ArticleLikeOrderListView(ListView):
     model = Article
     template_name = "pencaseapp/like.html"
     ordering = 'object.comments.created_at'
-    paginate_by = 6
+    paginate_by = 10
 
 class ArticleUpdateView(OnlyYouMixin, UpdateView):
     model = Article

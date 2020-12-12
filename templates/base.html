@@ -24,7 +24,7 @@
     {% block extra_css %} {% endblock extra_css %}
 </head>
 
-<body class="rgba-yellow-light">
+<body class="rgba-lime-light">
     <div class="fixed-top">
         <nav class="navbar navbar-expand-sm navbar-dark  amber lighten-3 justify-content-between">
             <a class="navbar-brand" href="{% url 'pencaseapp:home' %}">
@@ -52,6 +52,7 @@
 
     <div class="container">{% block content %} {% endblock %}</div>
     {% block extra_body %} {% endblock %}
+    
     {% block extra_js %}{% endblock extra_js %}
     <!-- JQuery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

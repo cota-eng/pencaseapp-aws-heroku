@@ -1,31 +1,65 @@
 {% extends "base.html" %} {% load static %} {% block content %}
 <div>
-<h1>筆箱紹介へようこそ</h1>
+    <h2 class="">ようこそ、<br>みんなの筆箱へ。</h2>
+    <p><a href="{% url 'pencaseapp:random' %}">ランダムに見てみる</a></p>
     <ul>
         {% if user.is_authenticated %}
-        <li>{{user.nickname}}</li>
-        {% else %}
-        <li><a href="{% url 'account_login' %}">さいんいん</a></li>
+        <p>こんにちは、{{user.nickname}}さん！</p>
+
         {% endif %}
     </ul>
 </div>
 
 <main>
-        <div class="text-center">
-        <h2>ランダムな筆箱</h2>
-            <div class="row">
-                {% for object in object_list %}
-                <div class="col-lg-6 col-md-6 col-sm-12 my-3">
-                    <!-- <h5 class="card-title">{{object.title}}</h5> -->
-                    <img src="{{ object.thumbnail.url }}" class="img-thumbnail" />
-                    <div class="text-center"><a href="{% url 'pencaseapp:article_detail' object.pk %}"
-                        class="btn btn-primary"><i class="fas fa-angle-double-right"></i></a></div>
-<p>{{object.likes.count}}</p>                </div>
-                <br />
-                {% endfor %}
-            </div>
-        <nav aria-label="Page navigation example">
+    <div class="text-center">
 
+        <h2 class="my-4">ランダムな筆箱</h2>
+        <div class="row">
+
+            {% for object in object_list %}
+            <!--Grid column-->
+            <div class="col-lg-4 col-md-12 mb-4">
+                <!--Card-->
+                <div class="card">
+                    <!--Card image-->
+                    <div class="view overlay">
+                        <img src="{{ object.thumbnail.url }}" class="card-img-top" alt="">
+                        <a href="{% url 'pencaseapp:article_detail' object.pk %}">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <!--Card content-->
+                    <div class="card-body">
+                        <!--Title-->
+                        <h4 class="card-title">{{object.title}}</h4>
+                        <!--Text-->
+
+                        <a href="{% url 'pencaseapp:article_detail' object.pk %}" class="btn btn-light-blue">
+                            <i class="fas fa-angle-double-right"></i>
+                            詳しくみる！</a><br>
+                        <a><i class="fas fa-heart" style="color: #ff80ab;"></i> いいね ({{object.likes.count}})</a>
+                        <a><i class="fas fa-comment" style="color: #b2ff59 ;"></i> コメント
+                            ({{object.comments.all.count}})</a>
+                    </div>
+
+                </div>
+                <!--/.Card-->
+
+            </div>
+            <!--Grid column-->
+
+
+
+            <br />
+            {% empty %}
+            <p>no content</p>
+            {% endfor %}
+
+        </div>
+
+
+        <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center pagination-lg g-mt-28 g-mb-28">
                 <!-- 前へ の部分 -->
                 {% if page_obj.has_previous %}
@@ -35,7 +69,6 @@
                     </a>
                 </li>
                 {% endif %}
-
                 <!-- 数字の部分 -->
                 {% for num in page_obj.paginator.page_range %}
                 {% if num <= page_obj.number|add:5 and num >= page_obj.number|add:-5 %}
@@ -46,8 +79,8 @@
                 <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
                 {% endif %}
                 {% endif %}
+                {% empty %}
                 {% endfor %}
-
                 <!-- 次へ の部分 -->
                 {% if page_obj.has_next %}
                 <li class="page-item">
@@ -60,11 +93,8 @@
 
         </nav>
     </div>
-    <a onclick="window.history.back(); return false;">戻る</a>
-    <a href="{% url 'pencaseapp:article_create' %}" class="fixed-right-bottom btn-floating btn-lg btn-default"><i
-            class="fas fa-plus-circle fa-4x"
-            ></i>投稿する</a>
-            
-    </div>
+    <a href="{% url 'pencaseapp:article_create' %}"
+        class="fixed-right-bottom btn-floating  btn btn-lg btn-success px-2 py-2"><i class="fas fa-pencil-alt"></i>
+        投稿する！</a>
 </main>
 {% endblock content %}

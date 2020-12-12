@@ -14,6 +14,7 @@ trans "Sign In" %}{% endblock %} {% block content %}
                 アカウントをお持ちでないなら
                 <a href="{{ signup_url }}">アカウント作成 </a>してください。
             </p>
+            <p>筆箱の投稿、いいね、コメントをするにはログインしてください。</p>
             <form class="login text-center" style="color: #757575" method="POST" action="{% url 'account_login' %}">
                 {% csrf_token %} {{ form.as_p }} {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
