@@ -2,11 +2,14 @@
 {% load static %}
 {% block content %}
 <div>
-    <h2 class="title-css">ようこそ、みんなの筆箱へ。</h2>
-    <p><a class="btn btn-primary" href="{% url 'pencaseapp:random' %}">ランダムに見てみる</a></p>
+    <div class="text-center">
+
+        <h2 class="mb-4">ようこそ、<br>みんなの筆箱へ。</h2>
+    </div>
+        <p><a class="btn btn-primary" href="{% url 'pencaseapp:random' %}">ランダムに見てみる</a></p>
     <ul>
         {% if user.is_authenticated %}
-        <p>こんにちは、{{user.nickname}}さん！</p>
+        <p>こんにちは、{{user.nickname}}さん！<br>(ログイン済です)</p>
         {% else %}
         <p>まだログインしていません。</p>
         {% endif %}
