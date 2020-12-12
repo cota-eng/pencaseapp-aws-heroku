@@ -16,6 +16,7 @@ class Article(models.Model):
     description = RichTextField('説明',blank=True, null=True)
     # description = models.TextField()
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    # test
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="article_likes")
