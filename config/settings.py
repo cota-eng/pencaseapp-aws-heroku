@@ -243,11 +243,10 @@ if not DEBUG:
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
     # MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
     # 変更
-    DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
+    # DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # - -------------
-# AWS_LOCATION = 'static'
-
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, 'mysite/static'),
 # ]
