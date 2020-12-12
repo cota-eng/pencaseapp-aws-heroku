@@ -2,6 +2,6 @@
 {% load account %}
 {% load i18n %}
 
-{% block content %}{% autoescape off %}{% user_display user as user_display %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}このメールは、 {{ user_display }} というメールアドレスで {{ site_domain }}　に登録するための確認メールです。
+{% block content %}{% autoescape off %}{% user_display user as user_display %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}このメールは、 {{ user_display }} というメールアドレスで、サイトに登録するための確認メールです。
 
 間違いがなければ、次のURLから確認ボタンを押してください。 {{ activate_url }}{% endblocktrans %}{% endautoescape %}{% endblock %}

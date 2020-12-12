@@ -7,7 +7,6 @@ import environ
 env = environ.Env()
 env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY')
-# DEBUG = env('DEBUG')
 # ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 INSTALLED_APPS = [
@@ -45,9 +44,9 @@ AUTHENTICATION_BACKENDS = [
 SITE_ID = 1
 
 # set for users
-LOGIN_URL = "/"
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = "accounts:account_login"
+LOGIN_REDIRECT_URL = "pencaseapp:home"
+LOGOUT_REDIRECT_URL = "accounts:account_login"
 
 # ckeditor settings
 CKEDITOR_CONFIGS = {
@@ -56,7 +55,8 @@ CKEDITOR_CONFIGS = {
         'toolbar_Custom': [
             ['Bold','Underline'],
             ['NumberedList', 'BulletedList'],
-        ]
+        ],
+        'width':'auto'
     }
 }
 
@@ -115,8 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # for email backend
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = DEFAULT_FROM_EMAIL  = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
@@ -245,11 +244,10 @@ if not DEBUG:
     # 変更
     # DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-# - -------------
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'mysite/static'),
-# ]
-# STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# - --------------
+    # - -------------
+    # STATICFILES_DIRS = [
+    #     os.path.join(BASE_DIR, 'mysite/static'),
+    # ]
+    # STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+    # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    # - --------------

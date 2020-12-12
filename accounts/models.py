@@ -56,7 +56,7 @@ class CustomUser(AbstractBaseUser,PermissionsMixin):
     # first_name = models.CharField(_('first name'), max_length=30, blank=True)
     # last_name = models.CharField(_('last name'), max_length=150, blank=True)
     email = models.EmailField('email address', unique=True)
-    nickname = models.CharField('nickname', max_length=50, blank=False, null=False,default="初期ユーザー")
+    nickname = models.CharField('ニックネーム', max_length=10, blank=False, null=False,default="初期ユーザー")
     created_at = models.DateTimeField('created_at', auto_now=True ,auto_now_add=False)
     is_staff = models.BooleanField(
         'staff status',

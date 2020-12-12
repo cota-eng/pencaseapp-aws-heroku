@@ -1,87 +1,110 @@
 {% extends "base.html" %} {% load static %} {% block content %}
-<div class="container">
-    <div class="text-center">
-        <img src="{{ object.thumbnail.url }}" class="img-thumbnail" />
-        <br>
-        <p>{{object.description|safe}}</p>
-        <a href="https://{{object.author.nickname}}">dfs</a>
-        <small>{{object.author.nickname}}さんの筆箱</small><br />
-        {% if request.user == object.author %}
-        <a class="btn btn-danger" href="{% url 'pencaseapp:article_delete' object.pk %}"><i class="fas fa-trash"></i>
-            削除する</a>
-        {% endif %} {% if request.user == object.author %}
-        <a class="btn btn-light" href="{% url 'pencaseapp:article_update' object.pk %}"><i class="fas fa-pen"></i>
-            編集</a>
-        {% endif %}
-        <div class="container">
-            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large"
-                data-text="筆箱紹介を投稿しました。" data-hashtags="筆箱紹介" data-lang="ja" data-show-count="false">Tweet</a>
-            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        </div>
+<div class="text-center">
 
-        <a class="btn btn-primary" href="{% url 'pencaseapp:pencase_comment' object.pk %}">コメント</a>
+    <div class="row">
 
-        <form action="{% url 'pencaseapp:article_likes' object.pk %}" method="POST">
-            {% csrf_token %}
-            <button class="btn btn-primary" type="submit">
-                <i class="far fa-heart"></i> いいね ({{total_likes}})
-            </button>
-        </form>
-        <a class="btn btn-primary" href="{% url 'pencaseapp:home'%}"><i class="fas fa-backward"></i>  戻る</a>
-    </div>
-</div>
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-12 mb-4">
+            <!--Card-->
+            <div class="card ">
+                <!--Card image-->
+                <div class="view overlay">
+                    <img src="{{ object.thumbnail.url }}" class="card-img-top" alt="">
+                    <br>
+                    <a href="https://{{object.author.nickname}}"></a>
+                    <small>{{object.author.nickname}}さんの筆箱</small><br />
+                </div>
 
-<div class="card grey lighten-3 chat-room">
-    <div class="card-body">
-        {% for comment in object.comments.all %}
-        {% if comment.exists %}
-        <h2>感想・返信</h2>
-        {% endif %}
+                <!--Card content-->
+                <div class="card-body">
+                    {% if request.user == object.author %}
+                    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button"
+                        data-size="large" data-text="筆箱紹介を投稿しました。" data-hashtags="筆箱紹介" data-lang="ja"
+                        data-show-count="false">Tweet</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    {% else %}
 
-        <div class="row px-2">
-            <!-- Grid column -->
-            <div class="col-md-6 col-xl-8 pl-md-3 px-lg-auto px-0">
-                <div class="chat-message">
-                    <ul class="list-unstyled chat">
-                        <li class="d-flex justify-content-between mb-4">
-                            <div class="chat-body white p-3 ml-2 z-depth-1">
-                                <div class="header">
-                                    <strong class="primary-font">「{{comment.commentator.nickname}}」さん</strong>
-                                    <small class="pull-right text-muted"><i
-                                            class="far fa-clock"></i>{{comment.created_at}}</small>
-                                </div>
-                                <p class="mb-0">{{comment.text|linebreaks}}</p>
-                            </div>
-                        </li>
-                        <div>
-                            <a class="btn btn-info btn-rounded btn-sm waves-effect waves-light float-right"
-                            href="{% url 'pencaseapp:pencase_reply' comment.pk  %}">返信する</a>
-                        </a>
-                        </div>
-                        <hr />
-                        {% for reply in comment.replies.all %}
-                        <li class=" mr-2 offset-ml-lg-3 ml-0 "></li>
-                        <li class="d-flex justify-content-between mb-4">
-                            <div class="chat-body gray p-3 ml-2 z-depth-1">
-                                <div class="header">
-                                    <strong class="primary-font">{{reply.replyer.nickname}}</strong>
-                                    <small class="pull-right text-muted"><i class="far fa-clock"></i>
-                                        {{reply.created_at}}</small>
-                                </div>
-                                <p class="mb-0">{{reply.text}}</p>
-                            </div>
-                        </li>
-                        <hr class="w-100" />
-                        {% endfor %}
-                    </ul>
+                    {% endif %}
+                    {% if request.user == object.author %}
+                    <a class="btn btn-danger" href="{% url 'pencaseapp:article_delete' object.pk %}"><i
+                            class="fas fa-trash"></i>
+                        削除する</a>
+                    {% endif %} {% if request.user == object.author %}
+                    <a class="btn btn-light" href="{% url 'pencaseapp:article_update' object.pk %}"><i
+                            class="fas fa-pen"></i>
+                        編集</a>
+                    {% endif %}
+                    <!--Title-->
+                    <h4 class="card-title">{{object.title}}</h4>
+                    <!--Text-->
+                    <br>
+                    <p>{{object.description|safe}}</p>
+                    <a class="btn btn-primary" href="{% url 'pencaseapp:pencase_comment' object.pk %}"><i
+                            class="fas fa-comment"></i> コメントする</a>
+
+                    <form action="{% url 'pencaseapp:article_likes' object.pk %}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-pink" type="submit">
+                            <i class="far fas fa-heart"></i> いいね ({{total_likes}})
+                        </button>
+                    </form>
+
                 </div>
             </div>
-            <!-- Grid column -->
+            <!--/.Card-->
         </div>
-        <!-- Grid row -->
-        {% empty %}
-        <p>コメントはまだありません。</p>
-        {% endfor %}
+        <!--Grid column-->
     </div>
-</div>
-{% endblock content %}
+    <a class="btn btn-blue-grey mb-4" href="{% url 'pencaseapp:home'%}"><i class="fas fa-backward"></i> 戻る</a>
+    <div class="card grey lighten-4 chat-room">
+        <div class="card-body">
+            <h3 class="mb-4">感想・返信</h3>
+            {% for comment in object.comments.all %}
+            <hr>
+            <div class="row px-2">
+                <!-- Grid column -->
+                <div class="col-md-6 col-xl-8 pl-md-3 px-lg-auto px-0">
+                    <div class="chat-message">
+                        <ul class="list-unstyled chat">
+                            <li class="d-flex justify-content-between mb-4">
+                                <div class="chat-body white p-3 ml-2 z-depth-1">
+                                    <div class="header">
+                                        <strong class="primary-font">「{{comment.commentator.nickname}}」さん</strong>
+                                        <small class="pull-right text-muted"><i
+                                                class="far fa-clock"></i>{{comment.created_at}}</small>
+                                    </div>
+                                    <p class="mb-0">{{comment.text|linebreaks}}</p>
+                                </div>
+                            </li>
+                            <div>
+                                <a class="btn btn-info btn-sm waves-effect waves-light float-right"
+                                    href="{% url 'pencaseapp:pencase_reply' comment.pk  %}">返信する</a>
+                                </a>
+                            </div>
+                                <br><br>
+                            
+                            {% for reply in comment.replies.all %}
+                            <li class=" mr-2 offset-ml-lg-3 ml-0 "></li>
+                            <li class="d-flex justify-content-between mb-4">
+                                <div class="chat-body gray p-3 ml-2 z-depth-1">
+                                    <div class="header">
+                                        <strong class="primary-font">{{reply.replyer.nickname}}</strong>
+                                        <small class="pull-right text-muted"><i class="far fa-clock"></i>
+                                            {{reply.created_at}}</small>
+                                    </div>
+                                    <p class="mb-0">{{reply.text}}</p>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+            {% empty %}
+            <p>コメントはまだありません。</p>
+            {% endfor %}
+        </div>
+    </div>
+    {% endblock content %}

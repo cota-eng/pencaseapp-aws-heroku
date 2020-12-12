@@ -1,7 +1,8 @@
 {% extends "base.html" %} 
+{% load static %}
 {% block content %}
 <div>
-    <h1 class="">みんなの筆箱紹介へようこそ</h1>
+    <h2 class="">ようこそ、<br>みんなの筆箱へ。</h2>
     <p><a href="{% url 'pencaseapp:random' %}">ランダムに見てみる</a></p>
     <ul>
         {% if user.is_authenticated %}
@@ -13,7 +14,8 @@
 
 <main>
     <div class="text-center">
-        <h2>今話題のの筆箱</h2>
+        
+        <h2 class="my-4">話題の筆箱</h2>
         <div class="row">
 
             {% for object in article_trend %}
@@ -34,12 +36,12 @@
                         <!--Title-->
                         <h4 class="card-title">{{object.title}}</h4>
                         <!--Text-->
-                        <small class="text-right">{{object.author.nickname}}</small><br>
-                        <a href="{% url 'pencaseapp:article_detail' object.pk %}" class="btn btn-info">
+                        
+                        <a href="{% url 'pencaseapp:article_detail' object.pk %}" class="btn btn-light-blue">
                         <i class="fas fa-angle-double-right"></i>
                             詳しくみる！</a><br>
-                    <a><i class="fas fa-heart" style="color: rgb(223, 14, 160);"></i> ({{object.likes.count}})</a>
-                    <a><i class="fas fa-comment" style="color: rgb(27, 231, 27);"></i> コメント数
+                    <a><i class="fas fa-heart" style="color: #ff80ab;"></i> いいね ({{object.likes.count}})</a>
+                    <a><i class="fas fa-comment" style="color: #b2ff59 ;"></i> コメント
                         ({{object.comments.all.count}})</a>
                     </div>
 
@@ -176,7 +178,7 @@
     </div>
 
     <a href="{% url 'pencaseapp:article_create' %}"
-        class="fixed-right-bottom btn-floating btn-lg btn-default"><i class="fas fa-pencil-alt"></i> 投稿する！</a>
+        class="fixed-right-bottom btn-floating  btn btn-lg btn-success px-2 py-2"><i class="fas fa-pencil-alt"></i> 投稿する！</a>
 
     </div>
 </main>

@@ -2,7 +2,6 @@ from django.urls import path
 from .views import IndexView,ProfileView,ProfileEditView,LoginView,LogoutView,SignupView
 app_name = "accounts"
 urlpatterns = [
-    # path("", IndexView.as_view(), name="home"),
     path("profile/", ProfileView.as_view(), name="profile"),
     path("profile/edit", ProfileEditView.as_view(), name="profile_edit"),
     path("login/", LoginView.as_view(), name="account_login"),

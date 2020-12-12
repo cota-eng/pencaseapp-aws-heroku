@@ -7,7 +7,7 @@ from django.shortcuts import reverse,resolve_url
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.contrib import messages
-
+from django.contrib.auth.decorators import login_required
 class OnlyYouMixin(UserPassesTestMixin):
     raise_exception = True
     def test_func(self):
@@ -15,6 +15,7 @@ class OnlyYouMixin(UserPassesTestMixin):
         print(self.object.author)
         return self.request.user == self.object.author
 
+@login_required
 def LikeView(request, pk):
     article = get_object_or_404(Article, pk=pk)
     if article.likes.filter(id=request.user.id).exists():
@@ -36,17 +37,13 @@ class ArticleRandomListView(ListView):
     model = Article
     template_name = "pencaseapp/random.html"
     ordering = '?'
-    paginate_by = 6
-
-    
-    
+    paginate_by = 10
 
 class ArticleLikeOrderListView(ListView):
     model = Article
     template_name = "pencaseapp/like.html"
     ordering = 'object.comments.created_at'
     paginate_by = 6
-
 
 class ArticleUpdateView(OnlyYouMixin, UpdateView):
     model = Article
