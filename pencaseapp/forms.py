@@ -4,20 +4,30 @@ from .models import Comment,Article,Reply
 class CommentCreateForm(forms.ModelForm):
     class Meta:
         model = Comment
-        exclude = ('comment_target','commentator',)
+        exclude = ('created_at','comment_target', 'commentator',)
         widgets = {
-            'text':forms.Textarea(attrs={'class':'form-control'})
+            'comment_text': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': '相手を傷つけないように注意しましょう。'
+                })
         }
+        labels = {
+            'comment_text':'感想を入力してください。'
+        }
+
 
 class ReplyCreateForm(forms.ModelForm):
     class Meta:
         model = Reply
         exclude = ('replyer','created_at','reply_target',)
         widgets = {
-            'text': forms.Textarea(attrs={
+            'reply_text': forms.Textarea(attrs={
                 'class': 'form-control',
-                'placeholder':'Reply'
+                'placeholder':'返事を記入してください。'
                 })
+        }
+        labels = {
+            'reply_text':'返事'
         }
 
 
@@ -26,9 +36,29 @@ class ArticleCreateForm(forms.ModelForm):
         model = Article
         exclude = ('author', 'created_at', 'updated_at', 'likes',)
         widgets = {
-            'text': forms.Textarea(attrs={
+            'theme': forms.Textarea(attrs={
                 'class': 'form-control',
-                'placeholder':'gfdgdfgdgfdgdfg'
+                'placeholder': '自分の筆箱のテーマを入力してください。',
+                'rows':'5'
                 }),
-            # ''
+            'pencase': forms.Textarea(attrs={
+                'class':'form-control',
+                'placeholder':'自分の筆箱の解説をしてください。\n書くことがなければ、「なし」などと記入してください。\n例えば、使っている筆箱は、ユナイテッドビーズのバトンペンケースです。'
+                }),
+            'mechanical_pencil': forms.Textarea(attrs={
+                'class':'form-control',
+                'placeholder':'自分のシャーペンの解説をしてください。\n書くことがなければ、「なし」などと記入してください。\n例えば、使っているシャーペンは、s20とクルトガアドバンスなどです。\ns20の良いところは...です。\nでも、値段が少し高いので扱いには注意しています。'
+                }),
+            'ball_point_pen': forms.Textarea(attrs={
+                'class':'form-control',
+                'placeholder':'自分のボールペンの解説をしてください。\n書くことがなければ、「なし」などと記入してください。\n例えば、使っているボールペンは、ゼブラのサラサがほとんどです。\n買いやすく、発色もいいので気に入っています。'
+                }),
+            'eraser': forms.Textarea(attrs={
+                'class':'form-control',
+                'placeholder':'自分の消しゴムの解説をしてください。\n書くことがなければ、「なし」などと記入してください。\n例えば、無難にMONOを使っています。\n折れやすいのが嫌ですが、安くて消しやすいです。'
+                }),
+            'others': forms.Textarea(attrs={
+                'class':'form-control',
+                'placeholder':'その他の文房具の解説をしてください。\n書くことがなければ、「なし」などと記入してください。\n例えば、定規はアルミアンドウッド定規、シャー芯はハイユニがお気に入りです。'
+                }),
         }

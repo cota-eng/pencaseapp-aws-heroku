@@ -11,21 +11,23 @@
                 <div class="view overlay">
                     <img src="{{ object.thumbnail.url }}" class="card-img-top" alt="" loading="lazy">
                     <br>
-                    <a href="https://{{object.author.nickname}}"></a>
                     <small>{{object.author.nickname}}さんの筆箱</small><br />
+                    <small>{{object.created_at}}に公開</small><br />
+                    <small>{{object.updated_at}}に更新</small><br />
                 </div>
 
                 <!--Card content-->
                 <div class="card-body">
                     {% if request.user == object.author %}
-                    <p>投稿したら、下のボタンからツイートしましょう！</p>
+                    <p>投稿したら、下のボタンから<br>ツイートしましょう！</p>
                     <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button"
                         data-size="large" data-text="筆箱紹介を投稿しました！" data-lang="ja" data-show-count="false">Tweet</a>
-                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><br>
                     {% else %}
+                    <p>下のボタンから<br>ツイッターでシェアしましょう！</p>
                     <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button"
-                        data-size="large" data-text="　　" data-lang="ja" data-show-count="false">Tweet</a>
-                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        data-size="large" data-text="" data-lang="ja" data-show-count="false">Tweet</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><br>
                     {% endif %}
                     {% if request.user == object.author %}
                     <a class="btn btn-danger" href="{% url 'pencaseapp:article_delete' object.pk %}"><i
@@ -37,21 +39,31 @@
                         編集</a>
                     {% endif %}
                     <!--Title-->
-                    <h4 class="card-title">{{object.title}}</h4>
-                    <!--Text-->
-                    <br>
-                    <div class="detail-style">
-                    {{object.description|safe}}
+                    <hr>
+                
+                    <div class="text-left mt-2">
+                        <h3 class="article__title"><i class="fas fa-folder-open"></i>テーマ</h3>
+                        <p class="article__content">{{object.theme|linebreaks}}</p>
+                        <h3 class="article__title"><i class="far fa-folder-open"></i> 筆箱</h3>
+                        <p class="article__content">{{object.pencase|linebreaks}}</p>
+                        <h3 class="article__title"><i class="fas fa-pencil-alt"></i> シャーペン</h3>
+                        <p class="article__content">{{object.mechanical_pencil|linebreaks}}</p>
+                        <h3 class="article__title"><i class="fas fa-pen-alt"></i> ボールペン</h3>
+                        <p class="article__content">{{object.ball_point_pen|linebreaks}}</p>
+                        <h3 class="article__title"><i class="fas fa-eraser"></i>消しゴム</h3>
+                        <p class="article__content">{{object.eraser|linebreaks}}</p>
+                        <h3 class="article__title"><i class="fas fa-cubes"></i>その他</h3>
+                        <p class="article__content">{{object.others|linebreaks}}</p>
                     </div>
-                    <a class="btn btn-primary" href="{% url 'pencaseapp:pencase_comment' object.pk %}"><i
-                            class="fas fa-comment"></i> コメントする</a>
 
-                    <form action="{% url 'pencaseapp:article_likes' object.pk %}" method="POST">
-                        {% csrf_token %}
-                        <button class="btn btn-pink" type="submit">
-                            <i class="far fas fa-heart"></i> いいね ({{total_likes}})
-                        </button>
-                    </form>
+                <form action="{% url 'pencaseapp:article_likes' object.pk %}" method="POST">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-danger btn-rounded waves-effect btn-sm" type="submit">
+                        <i class="far fas fa-heart"></i> {{total_likes}} いいね
+                    </button>
+                </form>
+                <a class="btn btn-outline-info btn-rounded waves-effect btn-sm"
+                    href="{% url 'pencaseapp:pencase_comment' object.pk %}"><i class="fas fa-comment"></i> コメントする</a>
 
                 </div>
             </div>
@@ -59,7 +71,7 @@
         </div>
         <!--Grid column-->
     </div>
-    <a class="btn btn-blue-grey mb-4" href="{% url 'pencaseapp:home'%}"><i class="fas fa-backward"></i>  戻る</a>
+    <a class="btn btn-blue-grey mb-4" href="{% url 'pencaseapp:home'%}"><i class="fas fa-backward"></i> 戻る</a>
     <div class="card grey lighten-4 chat-room">
         <div class="card-body">
             <h3 class="mb-4">感想・返信</h3>
@@ -85,8 +97,8 @@
                                     href="{% url 'pencaseapp:pencase_reply' comment.pk  %}">返信する</a>
                                 </a>
                             </div>
-                                <br><br>
-                            
+                            <br><br>
+
                             {% for reply in comment.replies.all %}
                             <li class=" mr-2 offset-ml-lg-3 ml-0 "></li>
                             <li class="d-flex justify-content-between mb-4">
@@ -111,5 +123,5 @@
             {% endfor %}
         </div>
     </div>
-        <a class="btn btn-blue-grey my-4" href="{% url 'pencaseapp:home'%}"><i class="fas fa-backward"></i> 戻る</a>
+    <a class="btn btn-blue-grey my-4" href="{% url 'pencaseapp:home'%}"><i class="fas fa-backward"></i> 戻る</a>
     {% endblock content %}

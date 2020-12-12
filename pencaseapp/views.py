@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-class OnlyYouMixin(UserPassesTestMixin):
+class EditDeleteOnlyAuthorMixin(UserPassesTestMixin):
     raise_exception = True
     def test_func(self):
         self.object = self.get_object()
@@ -45,7 +45,7 @@ class ArticleLikeOrderListView(ListView):
     ordering = 'object.comments.created_at'
     paginate_by = 10
 
-class ArticleUpdateView(OnlyYouMixin, UpdateView):
+class ArticleUpdateView(EditDeleteOnlyAuthorMixin, UpdateView):
     model = Article
     template_name = "pencaseapp/article_form.html"
     form_class = ArticleCreateForm
@@ -56,7 +56,7 @@ class ArticleUpdateView(OnlyYouMixin, UpdateView):
     def form_valid(self, form):
         return super().form_valid(form)
 
-class ArticleDeleteView(OnlyYouMixin, DeleteView):
+class ArticleDeleteView(EditDeleteOnlyAuthorMixin, DeleteView):
     model = Article
     template_name = "pencaseapp/article_delete.html"
     def get_success_url(self):
