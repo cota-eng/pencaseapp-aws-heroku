@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
 class EditDeleteOnlyAuthorMixin(UserPassesTestMixin):
     raise_exception = True
     def test_func(self):
@@ -24,26 +25,36 @@ def LikeView(request, pk):
         article.likes.add(request.user)
     return HttpResponseRedirect(reverse("pencaseapp:article_detail",args=[str(pk)]))
 
+"""TopPage"""
 class ArticleListView(ListView):
     model = Article
     template_name = "pencaseapp/index.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["article_trend"] = Article.objects.annotate().order_by('-likes')[:6]
+        context["article_trend"] = Article.objects.annotate(like_count=Count('likes')).order_by('-like_count')[:6]
         context["article_latest"] = Article.objects.order_by('-created_at')[:6]
         return context
-    
+
+"""Random"""    
 class ArticleRandomListView(ListView):
     model = Article
     template_name = "pencaseapp/random.html"
     ordering = '?'
     paginate_by = 10
 
+class ArticleLatestOrderListView(ListView):
+    model = Article
+    template_name = "pencaseapp/latest.html"
+    ordering = 'created_at'
+    paginate_by = 10
+
 class ArticleLikeOrderListView(ListView):
     model = Article
-    template_name = "pencaseapp/like.html"
-    ordering = 'object.comments.created_at'
+    template_name = "pencaseapp/trend.html"
     paginate_by = 10
+    def get_queryset(self):
+        return Article.objects.annotate(like_count=Count('likes')).order_by('-like_count')
+    
 
 class ArticleUpdateView(EditDeleteOnlyAuthorMixin, UpdateView):
     model = Article
@@ -51,8 +62,6 @@ class ArticleUpdateView(EditDeleteOnlyAuthorMixin, UpdateView):
     form_class = ArticleCreateForm
     def get_success_url(self):
         return reverse('pencaseapp:article_detail',kwargs={"pk":self.kwargs['pk']})
-    # def get_object(self):
-    #     return self.request.user
     def form_valid(self, form):
         return super().form_valid(form)
 
@@ -63,7 +72,6 @@ class ArticleDeleteView(EditDeleteOnlyAuthorMixin, DeleteView):
         return reverse('pencaseapp:home')
     def delete(self, request, *args, **kwargs):
         return super().delete(request, *args, **kwargs)
-
 
 class ArticleCreateView(LoginRequiredMixin,CreateView):
     model = Article
@@ -77,8 +85,9 @@ class ArticleCreateView(LoginRequiredMixin,CreateView):
         messages.success(self.request,'投稿が完了しました。ありがとうございました。')
         return super().form_valid(form)
     def get_success_url(self):
-        return reverse('pencaseapp:article_detail',kwargs={"pk":self.object.pk})
-
+        return reverse('pencaseapp:article_detail', kwargs={"pk": self.object.pk})
+        
+# 変更する
 class MyArticleListView(LoginRequiredMixin, ListView):
     model = Article
     template_name = "pencaseapp/my_article.html"
@@ -93,7 +102,6 @@ class ArticleDetailView(DetailView):
     template_name = "pencaseapp/detail.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        print(context)
         aim = get_object_or_404(Article, id=self.kwargs['pk'])
         total_likes = aim.get_total_likes()
         context["total_likes"] = total_likes
@@ -112,6 +120,9 @@ class CommentCreateView(LoginRequiredMixin,CreateView):
         comment = form.save(commit=False)
         comment.comment_target = pencase
         comment.commentator = self.request.user
+        if (comment.commentator == self.request.user):
+            messages.add_message(self.request, messages.INFO, '自分の投稿にはコメントできません。返信することはできます。')
+            return redirect('pencaseapp:article_detail', pk=comment.comment_target.pk)
         comment.save()
         return redirect('pencaseapp:article_detail',pk=pencase_pk)
 
@@ -128,10 +139,5 @@ class ReplyCreateView(LoginRequiredMixin,CreateView):
         reply.reply_target = comment
         reply.replyer = self.request.user
         reply.save()
+        messages.add_message(self.request, messages.INFO, '返事が送信されました。')
         return redirect('pencaseapp:article_detail', pk=comment.comment_target.pk)
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     comment_pk = self.kwargs['pk']
-    #     comment = get_object_or_404(Comment, pk=comment_pk)
-    #     context['post'] = comment.reply_target
-    #     return context
