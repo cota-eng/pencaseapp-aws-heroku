@@ -12,8 +12,10 @@
                     <img src="{% block thumbnail %}{{ object.thumbnail.url }}{% endblock thumbnail %}" class="card-img-top" alt="" loading="lazy">
                     <br>
                     <small>{{object.author.nickname}}さんの筆箱</small><br />
+                    <div class="text-right mr-4">
                     <small>{{object.created_at}}に公開</small><br />
                     <small>{{object.updated_at}}に更新</small><br />
+                    </div>
                 </div>
 
                 <!--Card content-->
@@ -42,18 +44,24 @@
                     <hr>
                 
                     <div class="text-left mt-2">
-                        <h3 class="article__title"><i class="fas fa-folder-open"></i>テーマ</h3>
+                        <h3 class="article__title"><i class="fas fa-flag"></i> テーマ</h3>
                         <p class="article__content">{{object.theme|linebreaks}}</p>
-                        <h3 class="article__title"><i class="far fa-folder-open"></i> 筆箱</h3>
+                        <hr>
+                        <h3 class="article__title"><i class="fas fa-folder-open"></i> 筆箱</h3>
                         <p class="article__content">{{object.pencase|linebreaks}}</p>
+                        <hr>
                         <h3 class="article__title"><i class="fas fa-pencil-alt"></i> シャーペン</h3>
                         <p class="article__content">{{object.mechanical_pencil|linebreaks}}</p>
+                        <hr>
                         <h3 class="article__title"><i class="fas fa-pen-alt"></i> ボールペン</h3>
                         <p class="article__content">{{object.ball_point_pen|linebreaks}}</p>
+                        <hr>
                         <h3 class="article__title"><i class="fas fa-eraser"></i>消しゴム</h3>
                         <p class="article__content">{{object.eraser|linebreaks}}</p>
+                        <hr>
                         <h3 class="article__title"><i class="fas fa-cubes"></i>その他</h3>
                         <p class="article__content">{{object.others|linebreaks}}</p>
+                        <hr>
                     </div>
 
                 <form action="{% url 'pencaseapp:article_likes' object.pk %}" method="POST">
@@ -85,11 +93,11 @@
                             <li class="d-flex justify-content-between mb-4">
                                 <div class="chat-body white p-3 ml-2 z-depth-1">
                                     <div class="header">
-                                        <strong class="primary-font">{{comment.commentator.nickname}}さん</strong>
+                                        <small class="primary-font">{{comment.commentator.nickname}}さん</small>
                                         <small class="pull-right text-muted"><i
                                                 class="far fa-clock"></i>{{comment.created_at}}</small>
                                     </div>
-                                    <p class="mb-0">{{comment.text|linebreaks}}</p>
+                                    <p class="mb-0 text-left">{{comment.comment_text}}</p>
                                 </div>
                             </li>
                             <div>
@@ -104,11 +112,11 @@
                             <li class="d-flex justify-content-between mb-4">
                                 <div class="chat-body gray p-3 ml-2 z-depth-1">
                                     <div class="header">
-                                        <strong class="primary-font">{{reply.replyer.nickname}}</strong>
+                                        <small class="primary-font">{{reply.replyer.nickname}}さん</small>
                                         <small class="pull-right text-muted"><i class="far fa-clock"></i>
                                             {{reply.created_at}}</small>
                                     </div>
-                                    <p class="mb-0">{{reply.text}}</p>
+                                    <p class="mb-0 text-left">{{reply.reply_text}}</p>
                                 </div>
                             </li>
                             {% endfor %}

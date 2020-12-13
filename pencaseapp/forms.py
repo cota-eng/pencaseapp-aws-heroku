@@ -8,7 +8,7 @@ class CommentCreateForm(forms.ModelForm):
         widgets = {
             'comment_text': forms.Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': '相手を傷つけないように注意しましょう。'
+                'placeholder': '相手を傷つけないように注意しましょう。\n※自分の投稿にはコメントできません。'
                 })
         }
         labels = {

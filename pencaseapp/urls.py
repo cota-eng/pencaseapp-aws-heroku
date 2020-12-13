@@ -8,13 +8,15 @@ from .views import (ArticleListView,
                     LikeView,
                     ArticleRandomListView,
                     ReplyCreateView,
+                    ArticleLatestOrderListView,
+                    ArticleLikeOrderListView,
                     MyArticleListView)
 
 app_name="pencaseapp"
 urlpatterns = [
     path('',ArticleListView.as_view(),name="home"),
-    # path('trend/',.as_view(),name="article_order_by_like"),
-    # path('latest/',.as_view(),name="article_order_by_created_at"),
+    path('trend/',ArticleLikeOrderListView.as_view(),name="article_order_by_like"),
+    path('latest/',ArticleLatestOrderListView.as_view(),name="article_order_by_created_at"),
     path('random/',ArticleRandomListView.as_view(),name="random"),
     path('mypage/',MyArticleListView.as_view(),name="mypage"),
     path('pencase/<int:pk>/',ArticleDetailView.as_view(),name="article_detail"),
