@@ -4,9 +4,18 @@
 
 <head>
     <title>{% block title %}みんなの筆箱紹介{% endblock %}</title>
-    {% block extra_head %} {% endblock %}
 
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    {% comment %} twitter card {% endcomment %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@pencaseofficial" />
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:title" content="みんなの筆箱紹介" />
+    <meta property="og:description" content="{% block meta-description %}{% endblock meta-description %}" />
+    <meta property="og:image" content="{% block thumbnail %}{% static 'toplogo.png' %}{% endblock thumbnail %}" />
+    {% block extra_head %} {% endblock %}
+
+
     <!-- material -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet" />
@@ -30,29 +39,29 @@
             <a class="navbar-brand" href="{% url 'pencaseapp:home' %}">
                 <img src="{% static 'toplogo.png' %}" height="40" alt="ロゴ" />
             </a>
-            <a class="btn btn-info btn-sm" id="" role="button" data-toggle=""
-                aria-haspopup="true" aria-expanded="false" href="{% url 'accounts:account_login' %}">
+            <a class="btn btn-info btn-sm" id="" role="button" data-toggle="" aria-haspopup="true" aria-expanded="false"
+                href="{% url 'accounts:account_login' %}">
                 ログイン
             </a>
-                {% comment %} <a class="dropdown-item" href="{% url 'accounts:profile_edit' %}">プロフィール</a> {% endcomment %}
+            {% comment %} <a class="dropdown-item" href="{% url 'accounts:profile_edit' %}">プロフィール</a> {% endcomment %}
 
         </nav>
     </div>
     <div class="container">
         <div class="text-center">
             {% if messages %}
-                {% for message in messages %}
-                <p class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">
-                    {{ message|safe }}
-                </p>
-                {% endfor %}
+            {% for message in messages %}
+            <p class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">
+                {{ message|safe }}
+            </p>
+            {% endfor %}
             {% endif %}
         </div>
     </div>
 
     <div class="container">{% block content %} {% endblock %}</div>
     {% block extra_body %} {% endblock %}
-    
+
     {% block extra_js %}{% endblock extra_js %}
     <!-- JQuery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

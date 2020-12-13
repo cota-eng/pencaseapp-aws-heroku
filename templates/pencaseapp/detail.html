@@ -9,7 +9,7 @@
             <div class="card ">
                 <!--Card image-->
                 <div class="view overlay">
-                    <img src="{{ object.thumbnail.url }}" class="card-img-top" alt="" loading="lazy">
+                    <img src="{% block thumbnail %}{{ object.thumbnail.url }}{% endblock thumbnail %}" class="card-img-top" alt="" loading="lazy">
                     <br>
                     <small>{{object.author.nickname}}さんの筆箱</small><br />
                     <small>{{object.created_at}}に公開</small><br />
