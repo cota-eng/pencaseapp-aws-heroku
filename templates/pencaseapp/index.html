@@ -7,6 +7,7 @@
         <h2 class="mb-4">ようこそ、<br>みんなの筆箱へ。</h2>
     </div>
     <p><a class="btn btn-primary" href="{% url 'pencaseapp:random' %}">ランダムに見てみる</a></p>
+    <p><a class="btn btn-primary" href="{% url 'pencaseapp:mypage' %}">マイページ</a></p>
     <ul>
         {% if user.is_authenticated %}
         <p>こんにちは、{{user.nickname}}さん！<br>(ログイン済です)</p>
@@ -58,7 +59,7 @@
             <p>no content</p>
             {% endfor %}
         </div>
-        <p>話題の筆箱をすべて見る</p>
+        <a class="btn btn-outline-secondary waves-effect" href="{% url 'pencaseapp:trend' %}">話題の筆箱をすべて見る</a>
     </div>
     <div class="text-center ">
         <h2 class="my-4">最新の筆箱</h2>
@@ -96,7 +97,7 @@
             <p>no content</p>
             {% endfor %}
         </div>
-
+    <a class="btn btn-outline-secondary waves-effect" href="{% url 'pencaseapp:latest' %}">最新の筆箱をすべて見る</a>
     </div>
 
     <a href="{% url 'pencaseapp:article_create' %}"

@@ -70,8 +70,11 @@
                         <i class="far fas fa-heart"></i> {{total_likes}} いいね
                     </button>
                 </form>
+                
+                {% if request.user != object.author %}
                 <a class="btn btn-outline-info btn-rounded waves-effect btn-sm"
                     href="{% url 'pencaseapp:pencase_comment' object.pk %}"><i class="fas fa-comment"></i> コメントする</a>
+                {% endif %}
 
                 </div>
             </div>

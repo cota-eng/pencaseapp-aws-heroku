@@ -1,0 +1,43 @@
+   {% extends 'base.html' %}
+   {% block content %}
+   <div class="text-center">
+   <h2>プロフィール</h2>
+   <p>ニックネーム：{{ request.user.nickname }}</p>
+   <a class="btn btn-info" href="{% url 'accounts:profile_edit' %}">ニックネームを変更</a>
+   <h2 class="mt-4">自分の投稿一覧</h2>
+   {% for object in myarticle %}
+   <div class="col-lg-4 col-md-12 my-4">
+       <!--Card-->
+       <div class="card">
+           <!--Card image-->
+           <div class="view overlay">
+               <img src="{{ object.thumbnail.url }}" class="card-img-top" alt="" loading="lazy">
+               <a href="{% url 'pencaseapp:article_detail' object.pk %}">
+                   <div class="mask rgba-white-slight"></div>
+               </a>
+           </div>
+
+           <!--Card content-->
+           <div class="card-body mt-0">
+               <!--Title-->
+               <h4 class="card-title">{{object.title}}</h4>
+               <!--Text-->
+
+               <a href="{% url 'pencaseapp:article_detail' object.pk %}" class="btn btn-light-blue btn-sm mb-1">
+                   <i class="fas fa-angle-double-right "></i>
+                   詳しくみる！</a><br>
+               <a><i class="fas fa-heart" style="color: #ff80ab;"></i> {{object.likes.count}}</a><span
+                   class="mx-1"></span><a><i class="fas fa-comment" style="color: #b2ff59 ;"></i>
+                   {{object.comments.all.count}}</a>
+           </div>
+       </div>
+       <!--/.Card-->
+   </div>
+   <!--Grid column-->
+   <br />
+   {% empty %}
+   <p>no content</p>
+   {% endfor %}
+   </div>
+   </div>
+   {% endblock content %}

@@ -43,7 +43,7 @@ class ProfileEditView(LoginRequiredMixin,View):
             user_data = CustomUser.objects.get(id=request.user.id)
             user_data.nickname = form.cleaned_data["nickname"]
             user_data.save()
-            return redirect('accounts:profile')
+            return redirect('pencaseapp:mypage')
         return render(request, "accounts/profile.html", {'form':form})
 
 class LoginView(views.LoginView):

@@ -61,6 +61,7 @@ class ArticleUpdateView(EditDeleteOnlyAuthorMixin, UpdateView):
     template_name = "pencaseapp/article_form.html"
     form_class = ArticleCreateForm
     def get_success_url(self):
+        messages.add_message(self.request, messages.SUCCESS, '投稿が更新されました。')
         return reverse('pencaseapp:article_detail',kwargs={"pk":self.kwargs['pk']})
     def form_valid(self, form):
         return super().form_valid(form)
@@ -69,6 +70,7 @@ class ArticleDeleteView(EditDeleteOnlyAuthorMixin, DeleteView):
     model = Article
     template_name = "pencaseapp/article_delete.html"
     def get_success_url(self):
+        messages.add_message(self.request, messages.SUCCESS, '投稿が削除されました。')
         return reverse('pencaseapp:home')
     def delete(self, request, *args, **kwargs):
         return super().delete(request, *args, **kwargs)
@@ -82,18 +84,18 @@ class ArticleCreateView(LoginRequiredMixin,CreateView):
         article = form.save(commit=False)
         article.author = self.request.user
         article.save()
-        messages.success(self.request,'投稿が完了しました。ありがとうございました。')
+        messages.success(self.request,'投稿が完了しました。画像の下から、ツイッターに共有しましょう！')
         return super().form_valid(form)
     def get_success_url(self):
         return reverse('pencaseapp:article_detail', kwargs={"pk": self.object.pk})
         
 # 変更する
-class MyArticleListView(LoginRequiredMixin, ListView):
+class MyPageView(LoginRequiredMixin, ListView):
     model = Article
-    template_name = "pencaseapp/my_article.html"
+    template_name = "pencaseapp/mypage.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["my_article"] = Article.objects.filter(author=self.request.user)
+        context["myarticle"] = Article.objects.filter(author=self.request.user)
         return context
     
 
@@ -120,7 +122,7 @@ class CommentCreateView(LoginRequiredMixin,CreateView):
         comment = form.save(commit=False)
         comment.comment_target = pencase
         comment.commentator = self.request.user
-        if (comment.commentator == self.request.user):
+        if (pencase.author == comment.commentator):
             messages.add_message(self.request, messages.INFO, '自分の投稿にはコメントできません。返信することはできます。')
             return redirect('pencaseapp:article_detail', pk=comment.comment_target.pk)
         comment.save()

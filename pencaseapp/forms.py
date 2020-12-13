@@ -1,7 +1,24 @@
 from django import forms
 from .models import Comment,Article,Reply
 
+class ProtectSpamForm(forms.CharField):
+    """override Field"""
+    
+    def __init__(self, label="荒らし対策",**kwargs):
+        super().__init__(required=True, label=label,**kwargs)
+        self.widget.attrs['placeholder'] = '「ふでばこ」を漢字に変換してください。'
+    def clean(self, value):
+        value = super().clean(value)
+        if value == '筆箱':
+            return value
+        else:
+            raise forms.ValidationError('違います。')
+
 class CommentCreateForm(forms.ModelForm):
+
+    captha = ProtectSpamForm(
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+    )
     class Meta:
         model = Comment
         exclude = ('created_at','comment_target', 'commentator',)

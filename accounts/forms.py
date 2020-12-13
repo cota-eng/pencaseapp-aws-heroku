@@ -1,7 +1,7 @@
 from django import forms
 from allauth.account.forms import SignupForm
 class ProfileForm(forms.Form):
-    nickname = forms.CharField(label="nickname", max_length=10, required=False)
+    nickname = forms.CharField(label="ニックネーム", max_length=10, required=True)
 
 class SignupCustomForm(SignupForm):
     nickname = forms.CharField(max_length=10, required=False)
