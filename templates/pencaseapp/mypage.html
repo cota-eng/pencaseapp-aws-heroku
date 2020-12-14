@@ -5,6 +5,7 @@
    <p>ニックネーム：{{ request.user.nickname }}</p>
    <a class="btn btn-info" href="{% url 'accounts:profile_edit' %}">ニックネームを変更</a>
    <h2 class="mt-4">自分の投稿一覧</h2>
+   <div class="row">
    {% for object in myarticle %}
    <div class="col-lg-4 col-md-12 my-4">
        <!--Card-->
@@ -38,6 +39,7 @@
    {% empty %}
    <p>no content</p>
    {% endfor %}
+   </div>
    </div>
    </div>
    {% endblock content %}

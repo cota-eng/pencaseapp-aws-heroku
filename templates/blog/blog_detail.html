@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}みんなの筆箱紹介！{% endblock %}
+{% block meta-description %}みんなが自由に自分の筆箱を紹介しあえるウェブサービスです。写真を載せることができ、いいね、コメントも可能。投稿も登録だけでかんたんにすることができます。{% endblock meta-description %}
+{% load static %}
+{% block content %}
+  <div class="blog">
+      {{ object.formatted_markdown|safe }}
+    </div>
+{% endblock content %}

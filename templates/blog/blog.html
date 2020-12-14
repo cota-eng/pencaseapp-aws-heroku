@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}みんなの筆箱紹介！|{% endblock %}
+
+{% load static %}
+{% block content %}
+  <div class="blog">
+      {% for post  in object_list %}
+      {{ post.title|safe }}
+      <!-- {{ post.formatted_markdown|safe }} -->
+      <a class=""  href="{% url 'blog:blog_detail' post.pk %}">jdifj</a>
+      {% endfor %}
+    </div>
+{% endblock content %}

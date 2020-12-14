@@ -3,8 +3,9 @@
 {% block content %}
 <div>
     <div class="text-center">
-
+        <div class="top-title">
         <h2 class="mb-4">ようこそ、<br>みんなの筆箱へ。</h2>
+        </div>
     </div>
     <p><a class="btn btn-primary" href="{% url 'pencaseapp:random' %}">ランダムに見てみる</a></p>
     <p><a class="btn btn-primary" href="{% url 'pencaseapp:mypage' %}">マイページ</a></p>
@@ -59,7 +60,8 @@
             <p>no content</p>
             {% endfor %}
         </div>
-        <a class="btn btn-outline-secondary waves-effect" href="{% url 'pencaseapp:trend' %}">話題の筆箱をすべて見る</a>
+        <a class="btn btn-outline-secondary waves-effect my-5" href="{% url 'pencaseapp:trend' %}">話題の筆箱をすべて見る <i
+                class="far fa-arrow-alt-circle-right"></i></a>
     </div>
     <div class="text-center ">
         <h2 class="my-4">最新の筆箱</h2>
@@ -97,7 +99,8 @@
             <p>no content</p>
             {% endfor %}
         </div>
-    <a class="btn btn-outline-secondary waves-effect" href="{% url 'pencaseapp:latest' %}">最新の筆箱をすべて見る</a>
+    <a class="btn btn-outline-secondary waves-effect my-5" href="{% url 'pencaseapp:latest' %}">最新の筆箱をすべて見る <i
+            class="far fa-arrow-alt-circle-right"></i></a>
     </div>
 
     <a href="{% url 'pencaseapp:article_create' %}"
@@ -107,14 +110,5 @@
     </div>
 
 </main>
-<!-- Footer -->
-<footer class="page-footer font-small amber lighten-3">
 
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">© 2020 Copyright:
-        <a>みんなの筆箱</a>
-    </div>
-    <!-- Copyright -->
-
-</footer>
 {% endblock content %}

@@ -7,7 +7,6 @@ import environ
 env = environ.Env()
 env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY')
-# ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -27,15 +26,10 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
-    # 'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.twitter',    
-    # 'allauth.socialaccount.providers.google',    
-    # 'allauth.socialaccount.providers.github',    
-    # 'widget_tweaks',
-    # 'crispy_forms',
     'storages',
     'imagekit',
-    'ckeditor',
+    'markdownx',  
+
 ]
 AUTHENTICATION_BACKENDS = [
    'django.contrib.auth.backends.ModelBackend',
@@ -50,16 +44,16 @@ LOGIN_REDIRECT_URL = "pencaseapp:home"
 LOGOUT_REDIRECT_URL = "accounts:account_login"
 
 # ckeditor settings
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'Custom',
-        'toolbar_Custom': [
-            ['Bold','Underline'],
-            ['NumberedList', 'BulletedList'],
-        ],
-        'width':'auto'
-    }
-}
+# CKEDITOR_CONFIGS = {
+#     'default': {
+#         'toolbar': 'Custom',
+#         'toolbar_Custom': [
+#             ['Bold','Underline'],
+#             ['NumberedList', 'BulletedList'],
+#         ],
+#         'width':'auto'
+#     }
+# }
 
 
 
@@ -189,7 +183,7 @@ ALLOWED_HOSTS = ['localhost','127.0.0.1','pencaseapp.herokuapp.com']
 #         },
 #     }
 # }
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 DATABASES = {
     'default': {
@@ -204,13 +198,14 @@ DATABASES = {
 
 db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
 DATABASES['default'].update(db_from_env)
-
+# not need for using aws 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 try:
     from .local_settings import *
 except ImportError:
     pass
+
 
 if not DEBUG:
     import django_heroku

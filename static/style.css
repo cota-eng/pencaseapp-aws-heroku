@@ -2,11 +2,12 @@ body {
   padding-top: 100px;
   padding-bottom: 0px;
   font-family: "Noto Sans JP", sans-serif;
+  
 }
 .fixed-right-bottom {
   position: fixed;
   right: 25px;
-  bottom: 40px;
+  bottom: 55px;
 }
 
 main h2 {
@@ -34,7 +35,42 @@ main h2 {
   width: 0;
   height: 0;
 }
-
+.top-title h2{
+    padding: 1rem 2rem;
+  border: 3px solid #000;
+}
+/* blog style */
+.blog h2 {
+  padding: 0.25em 0.5em;/*上下 左右の余白*/
+  color: #494949;/*文字色*/
+  background: transparent;/*背景透明に*/
+  border-left: solid 5px ;/*左線*/
+  margin: 2rem auto;
+}
+.blog h2 {
+  padding: 0.25em 0.5em;/*上下 左右の余白*/
+  color: #494949;/*文字色*/
+  background: transparent;/*背景透明に*/
+  border-left: solid 5px ;/*左線*/
+  margin: 2rem auto;
+}
+.blog h1 {
+    padding: 0.4em 0.5em;/*文字の上下 左右の余白*/
+  color: #494949;/*文字色*/
+  background: #f4f4f4;/*背景色*/
+  border-left: solid 5px;/*左線*/
+  border-bottom: solid 3px #d7d7d7;/*下線*/
+  margin: 2rem auto;
+}
+.blog ul, ol {
+  background: #fcfcfc;/*背景色*/
+  padding: 0.5em 0.5em 0.5em 2em;/*ボックス内の余白*/
+  border: solid 3px gray;/*線の種類 太さ 色*/
+}
+.blog ul li, ol li {
+  line-height: 1.5; /*文の行高*/
+  padding: 0.5em 0; /*前後の文との余白*/
+}
 @media (min-width: 992px) {
   body {
     font-size: 1.3rem;
