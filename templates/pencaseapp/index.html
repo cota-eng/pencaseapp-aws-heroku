@@ -26,14 +26,14 @@
                 <div class="card">
                     <!--Card image-->
                     <div class="view overlay">
-                        <img src="{{ object.thumbnail.url }}" class="card-img-top" alt="" loading="lazy">
+                        <img src="{{ object.thumbnail.url }}" class="card-img-top " alt="" loading="lazy">
                         <a href="{% url 'pencaseapp:article_detail' object.pk %}">
                             <div class="mask rgba-white-slight"></div>
                         </a>
                     </div>
 
                     <!--Card content-->
-                    <div class="card-body mt-0">
+                    <div class="card-body pt-0">
                         <!--Title-->
                         <h4 class="card-title">{{object.title}}</h4>
                         <!--Text-->
@@ -75,10 +75,6 @@
                     </div>
                     <!--Card content-->
                     <div class="card-body">
-                        <!--Title-->
-                        <h4 class="card-title">{{object.title}}</h4>
-                        <!--Text-->
-                        <small class="text-right">{{object.author.nickname}}</small><br>
                         <a href="{% url 'pencaseapp:article_detail' object.pk %}" class="btn btn-light-blue btn-sm">
                             <i class="fas fa-angle-double-right"></i>
                             詳しくみる！</a><br>

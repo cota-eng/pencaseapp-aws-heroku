@@ -9,10 +9,11 @@
     <meta name="twitter:site" content="@pencaseofficial" />
     <meta property="og:url" content="{{ request.build_absolute_uri }}" />
     <meta property="og:title" content="みんなの筆箱紹介！" />
-    {% comment %} <meta name="description" property="og:description"
+    {% comment %}
+    <meta name="description" property="og:description"
         content="みんなが自由に自分の筆箱を紹介しあえるウェブサービスです。写真を載せることができ、いいね、コメントも可能。投稿も登録だけでかんたんにすることができます。" /> {% endcomment %}
     <meta name="description" property="og:description"
-        content="{% block meta-description %}みんなが自由に自分の筆箱を紹介しあえるウェブサービスです。写真を載せることができ、いいね、コメントも可能。投稿も登録だけでかんたんにすることができます。{% endblock meta-description %}" /> 
+        content="{% block meta-description %}みんなが自由に自分の筆箱を紹介しあえるウェブサービスです。写真を載せることができ、いいね、コメントも可能。投稿も登録だけでかんたんにすることができます。{% endblock meta-description %}" />
     <meta property="og:image" content="{% block thumbnail %}{% static 'forshareimage.png' %}{% endblock thumbnail %}" />
     {% block extra_head %} {% endblock %}
 
@@ -62,16 +63,16 @@
                         <a class="nav-link text-dark" href="{% url 'pencaseapp:random' %}">ランダム</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="#">トレンド</a>
+                        <a class="nav-link text-dark" href="{% url 'pencaseapp:trend' %}">トレンド</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="#">新着</a>
+                        <a class="nav-link text-dark" href="{% url 'pencaseapp:latest' %}">新着</a>
                     </li>
                     <li class="nav-item ">
                         <a class="nav-link text-dark" href="{% url 'blog:blog' %}">公式ブログ</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link text-dark" href="#">公式ツイッター</a>
+                        <a class="nav-link text-dark" href="https://twitter.com/officialpencase">公式ツイッター</a>
                     </li>
                 </ul>
                 <!-- Links -->
@@ -90,43 +91,42 @@
             {% endif %}
         </div>
     </div>
-
-    <div class="container">{% block content %} {% endblock %}</div>
-    {% block extra_body %} {% endblock %}
+    <main role="main" class="flex-shrink-0">
+        <div class="container">{% block content %} {% endblock %}</div>
+        {% block extra_body %} {% endblock %}
+    </main>
 
     <!-- Footer -->
-    <div class="text-center">
-    <footer class="page-footer font-small amber lighten-3 mt-auto pt-4 ">
-        <!-- Footer Links -->
-        <div class="container-fluid text-md-left text-dark">
-            <!-- Grid row -->
-            <div class="row">
-                <!-- Grid column -->
-                <div class="mx-auto text-center">
-                    <!-- Links -->
-                    <h5 class="text-uppercase">関連リンク</h5>
-                    <ul class="list-unstyled ">
-                        <li>
-                            <a href="#!" class="text-dark">プライバシーポリシー</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-dark">規約</a>
-                        </li>
-                    </ul>
+        <footer class="page-footer font-small amber lighten-3 mt-auto pt-4 ">
+            <!-- Footer Links -->
+            <div class="container-fluid text-md-left text-dark">
+                <!-- Grid row -->
+                <div class="row">
+                    <!-- Grid column -->
+                    <div class="mx-auto text-center">
+                        <!-- Links -->
+                        <h5 class="text-uppercase">関連リンク</h5>
+                        <ul class="list-unstyled ">
+                            <li>
+                                <a href="#!" class="text-dark">プライバシーポリシー</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="text-dark">規約</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Grid column -->
                 </div>
-                <!-- Grid column -->
+                <!-- Grid row -->
             </div>
-            <!-- Grid row -->
-        </div>
-        <!-- Footer Links -->
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3">© 2020 Copyright:
-            <a> pencase.com</a>
-        </div>
-        <!-- Copyright -->
-    </footer>
-    <!-- Footer -->
-    </div>
+            <!-- Footer Links -->
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3">© 2020 Copyright:
+                <a> pencase.com</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
+        <!-- Footer -->
 
     {% block extra_js %}{% endblock extra_js %}
     <!-- JQuery -->
