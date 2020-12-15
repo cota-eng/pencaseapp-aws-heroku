@@ -6,7 +6,7 @@
     {% include 'pencaseapp/top.html' %}
     <ul>
         {% if user.is_authenticated %}
-        <p>こんにちは、{{user.nickname}}さん！<br>(ログイン済です)</p>
+        <p>こんにちは、<br>{{user.nickname}}さん(ログイン済)</p>
         {% else %}
         <p>まだログインしていません。</p>
         {% endif %}

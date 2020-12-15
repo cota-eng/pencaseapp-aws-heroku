@@ -40,6 +40,8 @@
            <p>no content</p>
            {% endfor %}
        </div>
+       <a href="{% url 'accounts:account_logout' %}" class="btn btn-danger">
+           ログアウト</a>
    </div>
        {% include 'pagenation.html' %}
 

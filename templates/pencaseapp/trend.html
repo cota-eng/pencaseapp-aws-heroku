@@ -1,17 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <!-- <div class="text-center">
-        <h2 class="mb-4">ようこそ、<br>みんなの筆箱へ。</h2>
-        {% if user.is_authenticated %}
-        <p>こんにちは、{{user.nickname}}さん！<br>(ログイン済です)</p>
-        {% else %}
-        <p>まだログインしていません。</p>
-        {% endif %}
-    </div> -->
-
     <div class="text-center ">
-        <h2 class="my-4">話題の筆箱</h2>
+        <h2 class="my-4 mx-4">話題の筆箱</h2>
+        <div class="card white my-4 py-4 px-4">
+            <p>このページではトレンドな筆箱を見学することができます。</p>
+            <p>いいね順にならんでいます。</p>
+        </div>
         <div class="row">
             {% for object in object_list %}
             <!--Grid column-->
