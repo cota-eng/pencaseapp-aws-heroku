@@ -13,8 +13,8 @@
                     <br>
                     <small>{{object.author.nickname}}さんの筆箱</small><br />
                     <div class="text-right mr-4">
-                    <small>{{object.created_at}}に公開</small><br />
-                    <small>{{object.updated_at}}に更新</small><br />
+                    <small>{{object.created_at|date}}に公開</small><br />
+                    <small>{{object.updated_at|date}}に更新</small><br />
                     </div>
                 </div>
 
@@ -46,22 +46,22 @@
                     <div class="text-left mt-2">
                         <h3 class="article__title"><i class="fas fa-flag"></i> テーマ</h3>
                         <p class="article__content">{{object.theme|linebreaks}}</p>
-                        <hr>
+                        <hr class="my-2">
                         <h3 class="article__title"><i class="fas fa-folder-open"></i> 筆箱</h3>
                         <p class="article__content">{{object.pencase|linebreaks}}</p>
-                        <hr>
+                        <hr class="my-2">
                         <h3 class="article__title"><i class="fas fa-pencil-alt"></i> シャーペン</h3>
                         <p class="article__content">{{object.mechanical_pencil|linebreaks}}</p>
-                        <hr>
+                        <hr class="my-2">
                         <h3 class="article__title"><i class="fas fa-pen-alt"></i> ボールペン</h3>
                         <p class="article__content">{{object.ball_point_pen|linebreaks}}</p>
-                        <hr>
+                        <hr class="my-2">
                         <h3 class="article__title"><i class="fas fa-eraser"></i>消しゴム</h3>
                         <p class="article__content">{{object.eraser|linebreaks}}</p>
-                        <hr>
+                        <hr class="my-2">
                         <h3 class="article__title"><i class="fas fa-cubes"></i>その他</h3>
                         <p class="article__content">{{object.others|linebreaks}}</p>
-                        <hr>
+                        <hr class="my-2">
                     </div>
 
                 <form action="{% url 'pencaseapp:article_likes' object.pk %}" method="POST">

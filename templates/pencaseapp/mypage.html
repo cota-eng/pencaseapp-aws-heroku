@@ -1,45 +1,58 @@
    {% extends 'base.html' %}
    {% block content %}
    <div class="text-center">
-   <h2>プロフィール</h2>
-   <p>ニックネーム：{{ request.user.nickname }}</p>
-   <a class="btn btn-info" href="{% url 'accounts:profile_edit' %}">ニックネームを変更</a>
-   <h2 class="mt-4">自分の投稿一覧</h2>
-   <div class="row">
-   {% for object in myarticle %}
-   <div class="col-lg-4 col-md-12 my-4">
-       <!--Card-->
-       <div class="card">
-           <!--Card image-->
-           <div class="view overlay">
-               <img src="{{ object.thumbnail.url }}" class="card-img-top" alt="" loading="lazy">
-               <a href="{% url 'pencaseapp:article_detail' object.pk %}">
-                   <div class="mask rgba-white-slight"></div>
-               </a>
-           </div>
+   <div class="card  blue lighten-5 my-4 py-4 px-4 text-left">
+       <p>このページでは</p>
+       <ul>
+       <li>ニックネームの変更</li>
+       <li>自分の投稿の管理</li>
+       <li>ログアウト</li>
+       </ul>
+       <p>ができます。</p>
+   </div>
+       <h2>プロフィール</h2>
+       <p>ニックネーム：{{ request.user.nickname }}</p>
+       <a class="btn btn-info" href="{% url 'accounts:profile_edit' %}">ニックネームを変更</a>
+       <h2 class="mt-4">自分の投稿一覧</h2>
+       <div class="row">
+           {% for object in myarticle %}
+           <div class="col-lg-4 col-md-12 my-4">
+               <!--Card-->
+               <div class="card">
+                   <!--Card image-->
+                   <div class="view overlay">
+                       <img src="{{ object.thumbnail.url }}" class="card-img-top" alt="" loading="lazy">
+                       <a href="{% url 'pencaseapp:article_detail' object.pk %}">
+                           <div class="mask rgba-white-slight"></div>
+                       </a>
+                   </div>
 
-           <!--Card content-->
-           <div class="card-body mt-0">
-               <!--Title-->
-               <h4 class="card-title">{{object.title}}</h4>
-               <!--Text-->
+                   <!--Card content-->
+                   <div class="card-body mt-0">
+                       <!--Title-->
+                       <h4 class="card-title">{{object.title}}</h4>
+                       <!--Text-->
 
-               <a href="{% url 'pencaseapp:article_detail' object.pk %}" class="btn btn-light-blue btn-sm mb-1">
-                   <i class="fas fa-angle-double-right "></i>
-                   詳しくみる！</a><br>
-               <a><i class="fas fa-heart" style="color: #ff80ab;"></i> {{object.likes.count}}</a><span
-                   class="mx-1"></span><a><i class="fas fa-comment" style="color: #b2ff59 ;"></i>
-                   {{object.comments.all.count}}</a>
+                       <a href="{% url 'pencaseapp:article_detail' object.pk %}" class="btn btn-light-blue btn-sm mb-1">
+                           <i class="fas fa-angle-double-right "></i>
+                           詳しくみる！</a><br>
+                       <a><i class="fas fa-heart" style="color: #ff80ab;"></i> {{object.likes.count}}</a><span
+                           class="mx-1"></span><a><i class="fas fa-comment" style="color: #b2ff59 ;"></i>
+                           {{object.comments.all.count}}</a>
+                   </div>
+               </div>
+               <!--/.Card-->
            </div>
+           <!--Grid column-->
+           <br />
+           {% empty %}
+           <p>no content</p>
+           {% endfor %}
        </div>
-       <!--/.Card-->
+       <a href="{% url 'accounts:account_logout' %}" class="btn btn-danger">
+           ログアウト</a>
    </div>
-   <!--Grid column-->
-   <br />
-   {% empty %}
-   <p>no content</p>
-   {% endfor %}
-   </div>
-   </div>
+       {% include 'pagenation.html' %}
+
    </div>
    {% endblock content %}

@@ -15,6 +15,18 @@
     <meta name="description" property="og:description"
         content="{% block meta-description %}みんなが自由に自分の筆箱を紹介しあえるウェブサービスです。写真を載せることができ、いいね、コメントも可能。投稿も登録だけでかんたんにすることができます。{% endblock meta-description %}" />
     <meta property="og:image" content="{% block thumbnail %}{% static 'forshareimage.png' %}{% endblock thumbnail %}" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4HQMWL1T6P"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-4HQMWL1T6P');
+    </script>
     {% block extra_head %} {% endblock %}
 
 
@@ -57,22 +69,28 @@
                 <!-- Links -->
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link text-dark" href="{% url 'pencaseapp:mypage' %}">マイページ</span></a>
+                        <a class="nav-link text-dark" href="{% url 'pencaseapp:mypage' %}"><i
+                                class="fas fa-user-alt"></i> マイページ</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="{% url 'pencaseapp:random' %}">ランダム</a>
+                        <a class="nav-link text-dark" href="{% url 'pencaseapp:random' %}"><i
+                                class="fas fa-random"></i> ランダム</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="{% url 'pencaseapp:trend' %}">トレンド</a>
+                        <a class="nav-link text-dark" href="{% url 'pencaseapp:trend' %}"><i
+                                class="fas fa-poll"></i> トレンド</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="{% url 'pencaseapp:latest' %}">新着</a>
+                        <a class="nav-link text-dark" href="{% url 'pencaseapp:latest' %}"><i
+                                class="fas fa-rss-square"></i> 新着</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link text-dark" href="{% url 'blog:blog' %}">公式ブログ</a>
+                        <a class="nav-link text-dark" href="{% url 'blog:blog' %}"><i
+                                class="fas fa-sticky-note"></i> 公式ブログ</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link text-dark" href="https://twitter.com/officialpencase">公式ツイッター</a>
+                        <a class="nav-link text-dark" href="https://twitter.com/officialpencase"><i
+                                class="fab fa-twitter-square"></i> 公式ツイッター</a>
                     </li>
                 </ul>
                 <!-- Links -->
@@ -95,9 +113,9 @@
         <div class="container">{% block content %} {% endblock %}</div>
         {% block extra_body %} {% endblock %}
     </main>
-
+    
     <!-- Footer -->
-        <footer class="page-footer font-small amber lighten-3 mt-auto pt-4 ">
+        <footer class="page-footer font-small amber lighten-3 mt-auto pt-4 mt-4 ">
             <!-- Footer Links -->
             <div class="container-fluid text-md-left text-dark">
                 <!-- Grid row -->
@@ -108,10 +126,10 @@
                         <h5 class="text-uppercase">関連リンク</h5>
                         <ul class="list-unstyled ">
                             <li>
-                                <a href="#!" class="text-dark">プライバシーポリシー</a>
+                                <a href="{% url 'privacy-policy' %}" class="text-dark">プライバシーポリシー</a>
                             </li>
                             <li>
-                                <a href="#!" class="text-dark">規約</a>
+                                <a href="{% url 'consent' %}" class="text-dark">利用規約</a>
                             </li>
                         </ul>
                     </div>

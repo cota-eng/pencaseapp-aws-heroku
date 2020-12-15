@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block content %}   
-  <form  method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      {{form.as_p}}
-      {{form.media}}
-<button type="submit" class="btn btn-outline-primary waves-effect">投稿する</button>
-      <a href="{{request.META.HTTP_REFERER}}" class="btn btn-outline-danger waves-effect">戻る</a>
-  </form>
+{% block content %}  
+<div class="mb-4">
+
+    <form  method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        {{form.media}}
+        <button type="submit" class="btn btn-outline-primary waves-effect">投稿する</button>
+        <a href="{{request.META.HTTP_REFERER}}" class="btn btn-outline-danger waves-effect">戻る</a>
+    </form>
+</div> 
 {% endblock content %}   

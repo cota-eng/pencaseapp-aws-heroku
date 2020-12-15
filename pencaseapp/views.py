@@ -13,7 +13,6 @@ class EditDeleteOnlyAuthorMixin(UserPassesTestMixin):
     raise_exception = True
     def test_func(self):
         self.object = self.get_object()
-        print(self.object.author)
         return self.request.user == self.object.author
 
 @login_required
@@ -40,20 +39,20 @@ class ArticleRandomListView(ListView):
     model = Article
     template_name = "pencaseapp/random.html"
     ordering = '?'
-    paginate_by = 9
+    paginate_by = 12
 
 """Latest"""
 class ArticleLatestOrderListView(ListView):
     model = Article
     template_name = "pencaseapp/latest.html"
     ordering = 'created_at'
-    paginate_by = 9
+    paginate_by = 12
 
 """Trend"""
 class ArticleLikeOrderListView(ListView):
     model = Article
     template_name = "pencaseapp/trend.html"
-    paginate_by = 10
+    paginate_by = 12
     def get_queryset(self):
         return Article.objects.annotate(like_count=Count('likes')).order_by('-like_count')
     

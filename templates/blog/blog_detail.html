@@ -1,9 +1,18 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}みんなの筆箱紹介！{% endblock %}
+
 {% block meta-description %}みんなが自由に自分の筆箱を紹介しあえるウェブサービスです。写真を載せることができ、いいね、コメントも可能。投稿も登録だけでかんたんにすることができます。{% endblock meta-description %}
 {% load static %}
 {% block content %}
-  <div class="blog">
+<div id="blog">
+  <div class="card blue-grey lighten-5 px-4 pb-4 pt-2 mb-4">
+      <h1 class="h2-responsive font-weight-bold text-center my-5">{{ object.title }}</h1>
+          <div class="text-right mb-2">
+              <small>作成日：{{object.created_at|date:"Y年n月j日"}}</small>
+              <small>更新日：{{object.created_at|date:"Y年n月j日"}}</small>
+            </div>
       {{ object.formatted_markdown|safe }}
     </div>
+</div>
 {% endblock content %}

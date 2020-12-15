@@ -11,6 +11,7 @@ from .views import (ArticleListView,
                     ArticleLatestOrderListView,
                     ArticleLikeOrderListView,
                     MyPageView)
+from django.views.generic import TemplateView
 
 app_name="pencaseapp"
 urlpatterns = [
@@ -26,4 +27,5 @@ urlpatterns = [
     path('update/<int:pk>/',ArticleUpdateView.as_view(),name="article_update"),
     path('delete/<int:pk>/',ArticleDeleteView.as_view(),name="article_delete"),
     path('like/<int:pk>/',LikeView,name="article_likes"),
+    
 ]

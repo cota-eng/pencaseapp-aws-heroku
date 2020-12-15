@@ -195,6 +195,10 @@ DATABASES = {
         'PORT': '',
     }
 }
+MARKDOWNX_MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.toc',
+    'markdown.extensions.sane_lists',
+]
 
 db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
 DATABASES['default'].update(db_from_env)

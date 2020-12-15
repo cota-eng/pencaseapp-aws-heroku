@@ -1,23 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<div>
-    <div class="text-center">
-
-        <h2 class="mb-4">ようこそ、<br>みんなの筆箱へ。</h2>
-    </div>
-    <p><a class="btn btn-primary" href="{% url 'pencaseapp:random' %}">ランダムに見てみる</a></p>
-    <ul>
-        {% if user.is_authenticated %}
-        <p>こんにちは、{{user.nickname}}さん！<br>(ログイン済です)</p>
-        {% else %}
-        <p>まだログインしていません。</p>
-        {% endif %}
-    </ul>
-</div>
-
     <div class="text-center ">
-        <h2 class="my-4">人気な筆箱</h2>
+        <h2 class="my-4 mx-4">話題の筆箱</h2>
+        <div class="card  blue lighten-5 my-4 py-4 px-4">
+            <p>このページではトレンドな筆箱を見学することができます。</p>
+            <p>いいね順にならんでいます。</p>
+        </div>
         <div class="row">
             {% for object in object_list %}
             <!--Grid column-->
@@ -49,13 +38,11 @@
             <!--Grid column-->
             <br />
             {% empty %}
-            <p>no content</p>
+            <p>まだ投稿がありません</p>
             {% endfor %}
         </div>
-
-
+        {% include "pagenation.html" %}
         {% include "pencaseapp/post_button.html" %}
-
     </div>
 
 
