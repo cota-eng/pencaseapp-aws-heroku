@@ -50,13 +50,13 @@
             <!--Grid column-->
             <br />
             {% empty %}
-            <p>no content</p>
+            <p>まだ投稿がありません</p>
             {% endfor %}
         </div>
-
+    {% include 'pagenation.html' %}
     </div>
     {% include "pencaseapp/post_button.html" %}
-    
+
     </div>
 
 </main>
