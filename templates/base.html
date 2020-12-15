@@ -93,22 +93,24 @@
 
     <div class="container">{% block content %} {% endblock %}</div>
     {% block extra_body %} {% endblock %}
+
     <!-- Footer -->
-    <footer class="page-footer font-small amber lighten-3 mt-auto pt-4">
+    <div class="text-center">
+    <footer class="page-footer font-small amber lighten-3 mt-auto pt-4 ">
         <!-- Footer Links -->
-        <div class="container-fluid text-center text-md-left text-dark">
+        <div class="container-fluid text-md-left text-dark">
             <!-- Grid row -->
             <div class="row">
                 <!-- Grid column -->
-                <div class="col-md-3 mb-md-0 mb-3">
+                <div class="mx-auto text-center">
                     <!-- Links -->
-                    <h5 class="text-uppercase ">Links</h5>
+                    <h5 class="text-uppercase">関連リンク</h5>
                     <ul class="list-unstyled ">
                         <li>
                             <a href="#!" class="text-dark">プライバシーポリシー</a>
                         </li>
                         <li>
-                            <a href="#!" class="text-dark">Link 2</a>
+                            <a href="#!" class="text-dark">規約</a>
                         </li>
                     </ul>
                 </div>
@@ -124,6 +126,7 @@
         <!-- Copyright -->
     </footer>
     <!-- Footer -->
+    </div>
 
     {% block extra_js %}{% endblock extra_js %}
     <!-- JQuery -->

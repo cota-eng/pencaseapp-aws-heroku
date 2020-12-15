@@ -40,14 +40,16 @@ class ArticleRandomListView(ListView):
     model = Article
     template_name = "pencaseapp/random.html"
     ordering = '?'
-    paginate_by = 10
+    paginate_by = 9
 
+"""Latest"""
 class ArticleLatestOrderListView(ListView):
     model = Article
     template_name = "pencaseapp/latest.html"
     ordering = 'created_at'
-    paginate_by = 10
+    paginate_by = 9
 
+"""Trend"""
 class ArticleLikeOrderListView(ListView):
     model = Article
     template_name = "pencaseapp/trend.html"

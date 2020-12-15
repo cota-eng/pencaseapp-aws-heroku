@@ -1,10 +1,10 @@
 {% extends "base.html" %} {% load static %} {% block content %}
 <div>
-    <h2 class="">ようこそ、<br>みんなの筆箱へ。</h2>
-    <p><a href="{% url 'pencaseapp:random' %}">ランダムに見てみる</a></p>
     <ul>
         {% if user.is_authenticated %}
         <p>こんにちは、{{user.nickname}}さん！<br>(ログイン済です)</p>
+        {% else %}
+        <p>未ログイン</p>
         {% endif %}
     </ul>
 </div>
@@ -93,8 +93,7 @@
 
         </nav>
     </div>
-    <a href="{% url 'pencaseapp:article_create' %}"
-        class="fixed-right-bottom btn-floating  btn btn-lg btn-success px-2 py-2"><i class="fas fa-pencil-alt"></i>
-        投稿する！</a>
+        {% include "pencaseapp/post_button.html" %}
+
 </main>
 {% endblock content %}

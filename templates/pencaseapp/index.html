@@ -2,13 +2,8 @@
 {% load static %}
 {% block content %}
 <div>
-    <div class="text-center">
-        <div class="top-title">
-        <h2 class="mb-4">ようこそ、<br>みんなの筆箱へ。</h2>
-        </div>
-    </div>
-    <p><a class="btn btn-primary" href="{% url 'pencaseapp:random' %}">ランダムに見てみる</a></p>
-    <p><a class="btn btn-primary" href="{% url 'pencaseapp:mypage' %}">マイページ</a></p>
+    
+    {% include 'pencaseapp/top.html' %}
     <ul>
         {% if user.is_authenticated %}
         <p>こんにちは、{{user.nickname}}さん！<br>(ログイン済です)</p>
@@ -102,10 +97,7 @@
     <a class="btn btn-outline-secondary waves-effect my-5" href="{% url 'pencaseapp:latest' %}">最新の筆箱をすべて見る <i
             class="far fa-arrow-alt-circle-right"></i></a>
     </div>
-
-    <a href="{% url 'pencaseapp:article_create' %}"
-        class="fixed-right-bottom btn-floating  btn btn-lg btn-success px-2 py-2"><i class="fas fa-pencil-alt"></i>
-        投稿する！</a>
+    {% include "pencaseapp/post_button.html" %}
 
     </div>
 
