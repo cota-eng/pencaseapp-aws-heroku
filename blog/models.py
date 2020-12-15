@@ -11,6 +11,7 @@ class Category(models.Model):
 class Blog(models.Model):
     title = models.CharField('タイトル',max_length=50)
     text = MarkdownxField('本文')
+    thumbnail = models.ImageField("サムネイル", upload_to="media/blog/%Y/%m/%d", height_field=None, width_field=None, max_length=None)
     category = models.ForeignKey(Category, related_name="category", on_delete=models.CASCADE)
     meta_description = models.TextField("メタディスクリプション",blank=True)
     created_at = models.DateTimeField('作成日',default=timezone.now)

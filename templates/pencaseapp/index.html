@@ -1,21 +1,13 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<div>
-    
     {% include 'pencaseapp/top.html' %}
-    <ul>
-        {% if user.is_authenticated %}
-        <p>こんにちは、<br>{{user.nickname}}さん(ログイン済)</p>
-        {% else %}
-        <p>まだログインしていません。</p>
-        {% endif %}
-    </ul>
-</div>
-
 <main>
     <div class="text-center">
-
+        <div class="card blue lighten-5 my-4 py-4 px-4">
+            <p>このページでは話題、最新の筆箱を見学することができます。</p>
+            <p>左上でメニューへ、トップ画像でホームへ、そして右上からログインできます。</p>
+        </div>
         <h2 class="my-4">話題の筆箱</h2>
         <div class="row">
 

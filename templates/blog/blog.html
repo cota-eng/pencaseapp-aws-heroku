@@ -8,7 +8,11 @@
     <!-- Section heading -->
     <h2 class="h1-responsive font-weight-bold text-center my-5">公式ブログ</h2>
     <!-- Section description -->
-    <p class="text-center w-responsive mx-auto mb-5">お知らせや、このサイトの使い方を載せております。</p>
+    <div class="card  blue lighten-5 my-4 py-4 px-4">
+    <p class="text-center w-responsive mx-auto ">お知らせや、このサイトの使い方を載せております。</p>
+    <p class="text-center w-responsive mx-auto ">他にも、文房具の情報を載せていきます。</p>
+    </div>
+    <hr class="my-6">
     <!-- Grid row -->
     <div class="row">
         {% for post  in object_list %}
@@ -46,9 +50,9 @@
             <p>あああああああああああああああああああああああああああああああ
             </p>
             <!-- Post data -->
-            <p>作成日：{{ post.created_at |date:"Y年n月j日"}}　更新日{{ post.updated_at |date:"Y年n月j日"}}</p>
+            <p>作成日：{{ post.created_at |date:"Y年n月j日"}}</p>
             <!-- Read more button -->
-            <a class="btn btn-success btn-md" href="{% url 'blog:blog_detail' post.pk %}">Read more</a>
+            <a class="btn btn-success btn-md" href="{% url 'blog:blog_detail' post.pk %}">全部読む</a>
 
         <hr class="my-5">
         </div>

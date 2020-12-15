@@ -1,6 +1,15 @@
    {% extends 'base.html' %}
    {% block content %}
    <div class="text-center">
+   <div class="card  blue lighten-5 my-4 py-4 px-4 text-left">
+       <p>このページでは</p>
+       <ul>
+       <li>ニックネームの変更</li>
+       <li>自分の投稿の管理</li>
+       <li>ログアウト</li>
+       </ul>
+       <p>ができます。</p>
+   </div>
        <h2>プロフィール</h2>
        <p>ニックネーム：{{ request.user.nickname }}</p>
        <a class="btn btn-info" href="{% url 'accounts:profile_edit' %}">ニックネームを変更</a>

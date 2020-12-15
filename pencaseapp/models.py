@@ -5,7 +5,7 @@ from imagekit.models import ImageSpecField, ProcessedImageField
 from imagekit.processors import ResizeToFill
 
 class Article(models.Model):
-    origin_image = models.ImageField('サムネイル',upload_to="media/%Y/%m/%d", height_field=None, width_field=None, max_length=None)
+    origin_image = models.ImageField('サムネイル',upload_to="media/%Y/%m/%d", height_field=None,null=True, width_field=None, max_length=None)
     thumbnail = ImageSpecField(source='origin_image',
                             processors=[ResizeToFill(480,270)],
                             format="JPEG",
