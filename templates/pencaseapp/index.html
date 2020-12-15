@@ -55,9 +55,11 @@
             <p>まだ投稿がありません</p>
             {% endfor %}
         </div>
-        <a class="btn btn-outline-secondary waves-effect my-5" href="{% url 'pencaseapp:trend' %}">話題の筆箱をすべて見る <i
+        <a class="btn btn-info btn-rounded" href="{% url 'pencaseapp:trend' %}">話題の筆箱をすべて見る <i
                 class="far fa-arrow-alt-circle-right"></i></a>
     </div>
+    <hr class="my-4">
+
     <div class="text-center ">
         <h2 class="my-4">最新の筆箱</h2>
         <div class="row">
@@ -90,7 +92,7 @@
             <p>まだ投稿がありません</p>
             {% endfor %}
         </div>
-    <a class="btn btn-outline-secondary waves-effect my-5" href="{% url 'pencaseapp:latest' %}">最新の筆箱をすべて見る <i
+    <a class="btn btn-info btn-rounded mb-4" href="{% url 'pencaseapp:latest' %}">最新の筆箱をすべて見る <i
             class="far fa-arrow-alt-circle-right"></i></a>
     </div>
     {% include "pencaseapp/post_button.html" %}

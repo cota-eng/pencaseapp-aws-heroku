@@ -15,6 +15,18 @@
     <meta name="description" property="og:description"
         content="{% block meta-description %}みんなが自由に自分の筆箱を紹介しあえるウェブサービスです。写真を載せることができ、いいね、コメントも可能。投稿も登録だけでかんたんにすることができます。{% endblock meta-description %}" />
     <meta property="og:image" content="{% block thumbnail %}{% static 'forshareimage.png' %}{% endblock thumbnail %}" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4HQMWL1T6P"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-4HQMWL1T6P');
+    </script>
     {% block extra_head %} {% endblock %}
 
 
@@ -95,7 +107,7 @@
         <div class="container">{% block content %} {% endblock %}</div>
         {% block extra_body %} {% endblock %}
     </main>
-
+    
     <!-- Footer -->
         <footer class="page-footer font-small amber lighten-3 mt-auto pt-4 mt-4 ">
             <!-- Footer Links -->
@@ -108,10 +120,10 @@
                         <h5 class="text-uppercase">関連リンク</h5>
                         <ul class="list-unstyled ">
                             <li>
-                                <a href="#!" class="text-dark">プライバシーポリシー</a>
+                                <a href="{% url 'privacy-policy' %}" class="text-dark">プライバシーポリシー</a>
                             </li>
                             <li>
-                                <a href="#!" class="text-dark">規約</a>
+                                <a href="{% url 'consent' %}" class="text-dark">利用規約</a>
                             </li>
                         </ul>
                     </div>

@@ -1,5 +1,5 @@
 {% extends "base.html" %} {% load static %} {% block content %}
-<div>
+{% comment %} <div>
     <ul>
         {% if user.is_authenticated %}
         <p>こんにちは、{{user.nickname}}さん！<br>(ログイン済です)</p>
@@ -7,13 +7,15 @@
         <p>未ログイン</p>
         {% endif %}
     </ul>
-</div>
+</div> {% endcomment %}
 
 <main>
     <div class="text-center">
 
         <h2 class="my-4">ランダムな筆箱</h2>
+        <div class="card white my-4 py-4">
         <p>このページではランダムに筆箱を見学することができます。</p><p>いいね・新着に関係なく見られるのでおすすめです。</p>
+        </div>
         <div class="row">
 
             {% for object in object_list %}
@@ -28,13 +30,11 @@
                             <div class="mask rgba-white-slight"></div>
                         </a>
                     </div>
-
                     <!--Card content-->
                     <div class="card-body">
                         <!--Title-->
                         <h4 class="card-title">{{object.title}}</h4>
                         <!--Text-->
-
                         <a href="{% url 'pencaseapp:article_detail' object.pk %}" class="btn btn-light-blue">
                             <i class="fas fa-angle-double-right"></i>
                             詳しくみる！</a><br>
@@ -42,24 +42,15 @@
                         <a><i class="fas fa-comment" style="color: #b2ff59 ;"></i> コメント
                             ({{object.comments.all.count}})</a>
                     </div>
-
                 </div>
                 <!--/.Card-->
-
             </div>
             <!--Grid column-->
-
-
-
             <br />
             {% empty %}
             <p>まだ投稿がありません</p>
             {% endfor %}
-
         </div>
-
-
-
     </div>
     {% include "pencaseapp/post_button.html" %}
 
