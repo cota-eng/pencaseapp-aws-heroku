@@ -19,7 +19,7 @@
 - 新着順（投稿順）での並び替え
 - ページネーション
 - Twitter共有時のサムネイル指定(Twitter Card)
-
+- GoogleAnalytics導入
 
 ## アプリケーション内で使用している技術一覧
 - Django(Python)
@@ -30,7 +30,6 @@
 - Twitter Card
 - pip(runtime.txt)
 - 画像アップロード（pillow, Imagekit　）
-- - ログイン（django-allauthのカスタマイズ）
 
 ## デプロイ
 herokuを用いた。
