@@ -4,8 +4,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 import debug_toolbar
 from django.views.generic import TemplateView
+
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+import environ
+env = environ.Env()
+env.read_env(os.path.join(BASE_DIR, '.env'))
+ADMIN_URL = env('ADMIN_URL')
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path(ADMIN_URL + '/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('blog/', include('blog.urls')),
     path('markdownx/', include('markdownx.urls')),
