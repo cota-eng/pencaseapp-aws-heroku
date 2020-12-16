@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
+
 class EditDeleteOnlyAuthorMixin(UserPassesTestMixin):
     raise_exception = True
     def test_func(self):
@@ -18,10 +19,13 @@ class EditDeleteOnlyAuthorMixin(UserPassesTestMixin):
 @login_required
 def LikeView(request, pk):
     article = get_object_or_404(Article, pk=pk)
-    if article.likes.filter(id=request.user.id).exists():
-        article.likes.remove(request.user)
-    else:    
-        article.likes.add(request.user)
+    if request.user == article.author:
+        messages.add_message(request, messages.INFO, '自分の投稿にいいねできません。')
+    else:
+        if article.likes.filter(pk=request.user.pk).exists():
+            article.likes.remove(request.user)
+        else:    
+            article.likes.add(request.user)
     return HttpResponseRedirect(reverse("pencaseapp:article_detail",args=[str(pk)]))
 
 """TopPage"""
@@ -66,6 +70,8 @@ class ArticleUpdateView(EditDeleteOnlyAuthorMixin, UpdateView):
         return reverse('pencaseapp:article_detail',kwargs={"pk":self.kwargs['pk']})
     def form_valid(self, form):
         return super().form_valid(form)
+    def form_invalid(self, form):
+        return super().form_invalid(form)
 
 class ArticleDeleteView(EditDeleteOnlyAuthorMixin, DeleteView):
     model = Article
@@ -90,7 +96,6 @@ class ArticleCreateView(LoginRequiredMixin,CreateView):
     def get_success_url(self):
         return reverse('pencaseapp:article_detail', kwargs={"pk": self.object.pk})
         
-# 変更する
 class MyPageView(LoginRequiredMixin, ListView):
     model = Article
     template_name = "pencaseapp/mypage.html"

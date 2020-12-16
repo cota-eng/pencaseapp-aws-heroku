@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'storages',
     'imagekit',
-    'markdownx',  
+    'markdownx',
+    'debug_toolbar',
 
 ]
 AUTHENTICATION_BACKENDS = [
@@ -65,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     # 'whitenoise.middleware.WhiteNoiseMiddleware', 
 
 ]
@@ -110,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # for email backend
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = DEFAULT_FROM_EMAIL  = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
@@ -205,6 +207,15 @@ DATABASES['default'].update(db_from_env)
 # not need for using aws 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False,
+    'SHOW_TOOLBAR_CALLBACK': True,
+    'EXTRA_SIGNALS': ['myproject.signals.MySignal'],
+    'HIDE_DJANGO_SQL': False,
+    'TAG': 'div',
+    'ENABLE_STACKTRACES' : True,
+}
+
 try:
     from .local_settings import *
 except ImportError:
@@ -228,11 +239,11 @@ if not DEBUG:
     AWS_DEFAULT_ACL = None
 
     STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-    STATICFILES_DIRS = (
-        [
-            os.path.join(BASE_DIR, "static"),
-        ]
-    )
+    # STATICFILES_DIRS = (
+    #     [
+    #         os.path.join(BASE_DIR, "static"),
+    #     ]
+    # )
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     # AWS_S3_FILE_OVERWRITE = True
     AWS_S3_SECURE_URLS = True
@@ -240,14 +251,7 @@ if not DEBUG:
     # AWS_LOCATION = 'media'
     MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-    # MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
-    # 変更
     # DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    # - -------------
-    # STATICFILES_DIRS = [
-    #     os.path.join(BASE_DIR, 'mysite/static'),
-    # ]
     # STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
     # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    # - --------------
