@@ -8,6 +8,9 @@
 <div id="blog">
     <div class="card white px-4 pb-4 pt-2 mb-4">
         <h1 class="h2-responsive font-weight-bold text-center my-5">{{ object.title }}</h1>
+         <img src="{% block thumbnail %}{{ object.thumbnail.url }}{% endblock thumbnail %}" class="card-img-top" alt=""
+             loading="lazy">
+         <br>
         <div class="text-right mb-2">
             <small>作成日：{{object.created_at|date:"Y年n月j日"}}</small>
             <small>更新日：{{object.created_at|date:"Y年n月j日"}}</small>
