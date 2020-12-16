@@ -19,18 +19,13 @@ INSTALLED_APPS = [
     'pencaseapp.apps.PencaseappConfig',
     'blog.apps.BlogConfig',
     'django_cleanup.apps.CleanupConfig',
-    # 'rest_framework',
-    # 'rest_framework.authtoken',
-    # 'rest_auth',
-    # 'rest_auth.registration',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'storages',
     'imagekit',
     'markdownx',
-    'debug_toolbar',
-
+    # 'debug_toolbar',
 ]
 AUTHENTICATION_BACKENDS = [
    'django.contrib.auth.backends.ModelBackend',
@@ -66,7 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
     # 'whitenoise.middleware.WhiteNoiseMiddleware', 
 
 ]
@@ -134,8 +129,7 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# MEDIA_URL = '/media/'
+
 """Use Custom User"""
 ACCOUNT_FORMS = {'signup': 'accounts.forms.SignupCustomForm'}
 AUTH_USER_MODEL = "accounts.CustomUser"
@@ -204,23 +198,11 @@ MARKDOWNX_MARKDOWN_EXTENSIONS = [
 
 db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
 DATABASES['default'].update(db_from_env)
-# not need for using aws 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-DEBUG_TOOLBAR_CONFIG = {
-    'INTERCEPT_REDIRECTS': False,
-    'SHOW_TOOLBAR_CALLBACK': True,
-    'EXTRA_SIGNALS': ['myproject.signals.MySignal'],
-    'HIDE_DJANGO_SQL': False,
-    'TAG': 'div',
-    'ENABLE_STACKTRACES' : True,
-}
 
 try:
     from .local_settings import *
 except ImportError:
     pass
-
 
 if not DEBUG:
     import django_heroku
@@ -233,25 +215,14 @@ if not DEBUG:
     AWS_S3_OBJECT_PARAMETERS = {
         'CacheControl': 'max-age=86400',
     }
-
     AWS_LOCATION = 'static'
     AWS_DEFAULT_ACL = None
     AWS_DEFAULT_ACL = None
 
     STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-    # STATICFILES_DIRS = (
-    #     [
-    #         os.path.join(BASE_DIR, "static"),
-    #     ]
-    # )
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    # AWS_S3_FILE_OVERWRITE = True
     AWS_S3_SECURE_URLS = True
-    # AWS_QUERYSTRING_AUTH = False
-    # AWS_LOCATION = 'media'
     MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-    # DEFAULT_FILE_STORAGE = 'config.storage_backends.MediaStorage'
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    # STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-    # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+   
