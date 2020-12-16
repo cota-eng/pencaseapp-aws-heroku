@@ -36,18 +36,20 @@ main h2 {
   height: 0;
 }
 .top-title h2{
-    padding: 1rem 2rem;
+  padding: 1rem 2rem;
   border: 3px solid #000;
 }
 /* blog style */
 #blog h2 {
   padding: 1rem 2rem;
   border-left: 4px solid #000;
+  margin:2rem 0;
 }
 #blog ul, #blog ol {
   background: #fcfcfc;/*背景色*/
   padding: 0.5em 0.5em 0.5em 2em;/*ボックス内の余白*/
   border: solid 3px gray;/*線の種類 太さ 色*/
+  margin:2rem 0;
 }
 #blog ul li,#blog ol li {
   line-height: 1.5; /*文の行高*/
