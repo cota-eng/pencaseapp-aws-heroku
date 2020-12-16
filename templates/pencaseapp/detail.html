@@ -1,4 +1,6 @@
-{% extends "base.html" %} {% load static %} {% block content %}
+{% extends "base.html" %} {% load static %} 
+{% block thumbnail %}{{ object.thumbnail.url }}{% endblock thumbnail %}
+{% block content %}
 <div class="text-center">
 
     <div class="row">
@@ -9,7 +11,7 @@
             <div class="card ">
                 <!--Card image-->
                 <div class="view overlay">
-                    <img src="{% block thumbnail %}{{ object.thumbnail.url }}{% endblock thumbnail %}" class="card-img-top" alt="" loading="lazy">
+                    <img src="{{ object.thumbnail.url }}" class="card-img-top" alt="" loading="lazy">
                     <br>
                     <small>{{object.author.nickname}}さんの筆箱</small><br />
                     <div class="text-right mr-4">
