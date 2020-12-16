@@ -5,12 +5,13 @@ from imagekit.models import ImageSpecField, ProcessedImageField
 from imagekit.processors import ResizeToFill
 
 class Article(models.Model):
-    origin_image = models.ImageField('サムネイル',upload_to="media/%Y/%m/%d", height_field=None,null=True, width_field=None, max_length=None)
-    thumbnail = ImageSpecField(source='origin_image',
-                            processors=[ResizeToFill(480,270)],
-                            format="JPEG",
-                            options={'quality': 90}
-                            )
+    # origin_image = models.ImageField('サムネイル',upload_to="media/%Y/%m/%d", height_field=None,null=True, width_field=None, max_length=None)
+    thumbnail = ProcessedImageField(
+                                    upload_to="media/%Y/%m/%d",
+                                    processors=[ResizeToFill(960,540)],
+                                    format="JPEG",
+                                    options={'quality': 90},
+                                    )
     theme = models.TextField('テーマ')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
     pencase = models.TextField("筆箱")

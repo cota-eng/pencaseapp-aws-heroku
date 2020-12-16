@@ -51,7 +51,10 @@ class ReplyCreateForm(forms.ModelForm):
 class ArticleCreateForm(forms.ModelForm):
     class Meta:
         model = Article
-        exclude = ('author', 'created_at', 'updated_at', 'likes',)
+        exclude = ('author', 'created_at', 'updated_at', 'likes')
+        labels = {
+            'thumbnail':'サムネイル'
+        }
         widgets = {
             'theme': forms.Textarea(attrs={
                 'class': 'form-control',
