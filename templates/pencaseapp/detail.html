@@ -23,12 +23,14 @@
                     {% if request.user == object.author %}
                     <p>投稿したら、下のボタンから<br>ツイートしましょう！</p>
                     <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button"
-                        data-size="large" data-text="筆箱紹介を投稿しました！" data-lang="ja" data-show-count="false">Tweet</a>
+                        data-size="large" data-text="筆箱紹介を投稿しました！ #筆箱紹介 #文房具好きと繋がりたい #みんなの筆箱紹介" data-lang="ja"
+                        data-show-count="false">Tweet</a>
                     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><br>
                     {% else %}
                     <p>下のボタンから<br>ツイッターでシェアしましょう！</p>
                     <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button"
-                        data-size="large" data-text="" data-lang="ja" data-show-count="false">Tweet</a>
+                        data-size="large" data-text="いい筆箱! #筆箱紹介 #文房具好きと繋がりたい #みんなの筆箱紹介" data-lang="ja"
+                        data-show-count="false">Tweet</a>
                     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><br>
                     {% endif %}
                     {% if request.user == object.author %}
