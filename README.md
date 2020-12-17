@@ -1,6 +1,8 @@
 ## アプリケーションの概要
 文房具好きが集まって、自分の筆箱を写真・説明とともに載せ、共有することができるアプリケーション。
 
+  [筆箱紹介サイトリンク](https://pencase.herokuapp.com/ "みんなの筆箱紹介")
+
 ## アプリケーションの機能一覧
 主に以下の通りである。
 
@@ -26,7 +28,7 @@
 - Bootstrap4(material design & responsive)
 - AWS S3(static and media file are uploaded)
 - Heroku(Paas)
-- PostgresSQL(Heroku)
+- PostgreSQL(Heroku)
 - Twitter Card
 - pip(runtime.txt)
 - 画像アップロード（pillow, Imagekit　）
@@ -37,4 +39,4 @@ herokuを用いた。
 画像のキャッシュは2日としている。
 他のデータについては、herokuのPostgreSQLを用いている。
 
-## 使用した様子
+
