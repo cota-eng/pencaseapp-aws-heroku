@@ -49,7 +49,7 @@ class ArticleRandomListView(ListView):
 class ArticleLatestOrderListView(ListView):
     model = Article
     template_name = "pencaseapp/latest.html"
-    ordering = 'created_at'
+    ordering = '-created_at'
     paginate_by = 12
 
 """Trend"""
